@@ -1,6 +1,6 @@
 # Proof Video — Ready-to-Film Shot List
 
-Runtime target: **~4:30**. Film this in order — it's built to be shot mostly in one take with screen recordings cut in, so you don't need heavy editing to make it work.
+Runtime target: **~4:10**. Film this in order — it's built to be shot mostly in one take with screen recordings cut in, so you don't need heavy editing to make it work.
 
 ## Title
 **"I Let ChatGPT Find My Client's Website (Watch This)"**
@@ -57,17 +57,7 @@ Let it surface **Oborn Transfer & Storage** on screen. Click through to `oborn.c
 
 ---
 
-## 3:00–3:20 — NEW: Build Speed, Shown Not Claimed
-**Screen:** a sped-up or timestamped clip of an actual build session — even 10–15 seconds of fast-forwarded screen recording with a visible timer or on-screen clock counting up works. The goal is to visually back up "under 30 minutes," not just say it.
-
-**Say on camera (voiceover over the sped-up footage):**
-> "People assume '48 hours' means I'm slow. I'm not — once I have everything I need from someone, the actual build takes under 30 minutes. The 48 hours is me reading the application and thinking through how to position them, not sitting at a keyboard."
-
-*(This is the beat that makes the "5 builds a week" limit on your page believable instead of suspicious — it proves the cap is a choice about quality, not a bottleneck you're hiding.)*
-
----
-
-## 3:20–3:50 — Visual Cost Comparison
+## 3:00–3:30 — Visual Cost Comparison
 **Screen:** cut to a simple two-column graphic — no screen recording needed here, just a clean static or lightly animated slide.
 
 Left: **"$300–400+/mo forever"** — Right: **"$297 once — you own it forever"**
@@ -77,7 +67,7 @@ Left: **"$300–400+/mo forever"** — Right: **"$297 once — you own it foreve
 
 ---
 
-## 3:50–4:10 — Dr. Eric On Camera, Personal Review Promise
+## 3:30–3:50 — Dr. Eric On Camera, Personal Review Promise
 **Camera:** back to face on camera, direct to lens.
 
 **Say:**
@@ -85,7 +75,7 @@ Left: **"$300–400+/mo forever"** — Right: **"$297 once — you own it foreve
 
 ---
 
-## 4:10–4:30 — CTA (to the demo, not straight to the application)
+## 3:50–4:10 — CTA (to the demo, not straight to the application)
 **Camera:** still on you. On-screen text/arrow pointing to a link overlay.
 
 **Say word for word:**
@@ -100,13 +90,12 @@ Cut these four standalone clips from the same footage — no new filming needed:
 
 1. **Chatbot proof clip** (1:30–2:15) — strongest standalone hook for Reels/TikTok: "I asked a real AI chatbot a question, live."
 2. **AI-search proof clip** (2:15–3:00) — best for cold audiences who've never heard the AI-search-discoverability angle before; nobody else is making this claim.
-3. **Build speed + cost comparison clip** (3:00–3:50) — good for retargeting warm viewers who've already seen the proof and just need the price/trust close.
+3. **Cost comparison clip** (3:00–3:30) — good for retargeting warm viewers who've already seen the proof and just need the price/trust close.
 4. **Hook + problem clip** (0:00–0:50) — works as a standalone pattern-interrupt for coaches scrolling, with the dropdown-language pain points as on-screen text overlay.
 
 ## Before You Hit Record — Checklist
 - [ ] Combined demo/application page is redeployed and live at the correct URL
 - [ ] Chat widget tested working (real Groq responses, not just the scripted fallback)
 - [ ] A real query lined up for the Gemini AI-search beat (Oborn Transfer & Storage, or a coaching-niche client if you have one live by the time you film)
-- [ ] A build session recorded or timestamped in advance for the speed-proof beat
 - [ ] Cost-comparison graphic made (two columns, no animation needed)
 - [ ] Browser history/tabs cleared before recording so the "blank tab" beat looks genuinely blank
