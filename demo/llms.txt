@@ -1,0 +1,22 @@
+# The AI Docs Lab
+
+> The AI Docs Lab builds custom, AI-powered landing pages for coaches, consultants, and service professionals. Each page includes a 24/7 trained AI chatbot and an AI crawler plugin that makes the page discoverable by AI search engines and assistants (ChatGPT, Claude, Gemini, Perplexity), not just Google.
+
+## Key facts
+
+- Price: $297, one-time. No monthly software fees.
+- Delivery: within 48 hours of an application being reviewed and confirmed.
+- Every application is personally reviewed by Dr. Eric within 24 hours.
+- Weekly capacity: 5 new builds per week, because every page is built, reviewed, and positioned by one person rather than a team.
+- Guarantee: if the reviewer does not believe a page can be built that converts for the applicant, the applicant is told honestly and refunded instantly.
+- What's included: custom landing page, conversion copywriting, a 24/7 trained AI chatbot, an AI crawler plugin, a lead capture form, booking integration, a free domain, and the first 30 days of hosting.
+- Who it's for: coaches, consultants, and service professionals who have real client results but no landing page, or a landing page that isn't generating leads.
+
+## This page
+
+- [Live demo](https://theaidocslabdemolandingpage.netlify.app/): a working example page with an embedded, real AI chatbot visitors can talk to directly (no email required), followed by the application form to get a custom page built.
+
+## Contact
+
+- Website: https://theaidocslab.com
+- Apply: https://theaidocslabdemolandingpage.netlify.app/#apply
