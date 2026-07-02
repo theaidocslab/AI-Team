@@ -430,6 +430,28 @@ function appendMessage(text, sender) {
   messages.scrollTop = messages.scrollHeight;
 }
 
+const CHAT_API_URL = 'https://api.theaidocslab.com/chat';
+
+// Tries the real live backend first (Groq-powered). If it's not deployed yet,
+// misconfigured, or unreachable, falls back to the local scripted answers so
+// the demo always works.
+async function getBotReply(userText) {
+  try {
+    const res = await fetch(CHAT_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userText }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) throw new Error('bad status: ' + res.status);
+    const data = await res.json();
+    if (!data.reply) throw new Error('no reply in response');
+    return data.reply;
+  } catch (err) {
+    return findResponse(userText);
+  }
+}
+
 function showTypingThenReply(userText) {
   const messages = document.getElementById('chatMessages');
   const typing = document.createElement('div');
@@ -439,11 +461,11 @@ function showTypingThenReply(userText) {
   messages.appendChild(typing);
   messages.scrollTop = messages.scrollHeight;
 
-  setTimeout(() => {
+  getBotReply(userText).then((reply) => {
     const el = document.getElementById('typingIndicator');
     if (el) el.remove();
-    appendMessage(findResponse(userText), 'bot');
-  }, 700 + Math.random() * 500);
+    appendMessage(reply, 'bot');
+  });
 }
 
 function sendMessage() {
