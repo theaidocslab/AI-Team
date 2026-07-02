@@ -150,31 +150,6 @@ body {
   flex-shrink: 0;
 }
 
-/* SPOTS BAR */
-.spots-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.25);
-  padding: 8px 18px;
-  border-radius: 30px;
-  font-size: 12px;
-  color: var(--gold);
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.spots-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
 /* FORM AREA */
 .form-container {
   max-width: 640px;
@@ -331,11 +306,17 @@ footer {
   <div class="what-you-get">
     <div class="get-item"><div class="get-dot"></div>Custom Landing Page</div>
     <div class="get-item"><div class="get-dot"></div>Conversion Copy</div>
-    <div class="get-item"><div class="get-dot"></div>24/7 AI Chatbot</div>
+    <div class="get-item"><div class="get-dot"></div>24/7 Trained AI Chatbot</div>
+    <div class="get-item"><div class="get-dot"></div>AI Crawler Plugin</div>
     <div class="get-item"><div class="get-dot"></div>Lead Capture Form</div>
     <div class="get-item"><div class="get-dot"></div>Booking Integration</div>
-    <div class="get-item"><div class="get-dot"></div>Built For Tomorrow's Search</div>
     <div class="get-item"><div class="get-dot"></div>Free Domain + 30 Days Hosting</div>
+  </div>
+
+  <div style="max-width:480px; margin:0 auto 24px; background:rgba(201,168,76,0.1); border:1px solid var(--gold); border-radius:8px; padding:22px 24px; text-align:center;">
+    <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:10px;">Don't Take My Word For It</p>
+    <p style="font-size:14px; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px;">Talk to a real, live example — same AI chatbot, same crawler plugin, same system I'd build for you. No email required, no application, just go try it.</p>
+    <a href="https://theaidocslabdemolandingpage.netlify.app" target="_blank" rel="noopener" style="display:inline-block; background:var(--gold); color:var(--black); font-weight:700; font-size:13px; letter-spacing:1px; text-transform:uppercase; padding:12px 28px; border-radius:6px; text-decoration:none;">Try The Live Demo &rarr;</a>
   </div>
 
   <div style="max-width:480px; margin:0 auto 20px; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.25); border-radius:8px; padding:20px 24px;">
@@ -350,9 +331,9 @@ footer {
     <p style="font-size:14px; color:var(--gold-light); font-weight:600; line-height:1.6;">That's $300&ndash;$400+ every single month, forever &mdash; for a page that's invisible to where search is actually heading.</p>
   </div>
 
-  <div class="spots-bar">
-    <div class="spots-dot"></div>
-    <span>This is your chance to finally have the system — apply now</span>
+  <div style="max-width:480px; margin:0 auto; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:18px 24px; text-align:left;">
+    <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:10px;">The Honest Reason To Apply This Week</p>
+    <p style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.75; margin:0;">I build every single page myself — no team, no template farm, no subcontractor. That's not a sales line, it's how this runs, which means my available hours are the real constraint here, not a countdown clock. Every week you wait is another week paying a funnel platform $300&ndash;400+/month for a page that ChatGPT, Claude, and Perplexity still can't find.</p>
   </div>
 </div>
 
