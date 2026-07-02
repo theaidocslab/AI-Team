@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Powered Landing Page for Coaches & Professionals — Apply Now | The AI Docs Lab™</title>
+<meta name="description" content="Get a custom AI-powered landing page, 24/7 AI chatbot trained on your business, and lead capture system delivered in 48 hours. $297 one-time. No monthly fees. You own it forever.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzBhMGEwYSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMTgsMyA4LDE4IDE1LDE4IDE0LDI5IDI0LDE0IDE3LDE0IiBmaWxsPSIjQzlBODRDIi8+Cjwvc3ZnPgo=">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --black: #0A0A0A;
+  --black-2: #111111;
+  --black-3: #1A1A1A;
+  --white: #FFFFFF;
+  --muted: rgba(255,255,255,0.6);
+  --border: rgba(201,168,76,0.2);
+}
+body {
+  font-family: 'Raleway', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+}
+
+/* TOP BAR */
+.top-bar {
+  background: var(--gold);
+  padding: 10px 24px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* HERO */
+.hero {
+  background: var(--black);
+  padding: 64px 24px 56px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.logo {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+.badge {
+  display: inline-block;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 5.5vw, 58px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+.hero-title span { color: var(--gold); font-style: italic; }
+.hero-divider {
+  width: 60px; height: 2px;
+  background: var(--gold);
+  margin: 0 auto 24px;
+}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 32px;
+  line-height: 1.75;
+}
+.hero-sub strong { color: var(--gold-light); font-weight: 600; }
+
+/* PRICE REVEAL */
+.price-box {
+  display: inline-block;
+  background: var(--black-3);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 16px 40px;
+  margin-bottom: 32px;
+}
+.price-was {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: line-through;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.price-now {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.price-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* BADGES ROW */
+.what-you-get {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.get-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 7px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 1px;
+}
+.get-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* SPOTS BAR */
+.spots-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.spots-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* FORM AREA */
+.form-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(201,168,76,0.2);
+}
+
+.field-group { margin-bottom: 20px; }
+.field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+.field-input, .field-select, .field-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  color: var(--white);
+  transition: all 0.2s;
+}
+.field-input::placeholder, .field-textarea::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+.field-input:focus, .field-select:focus, .field-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.04);
+}
+.field-select {
+  appearance: none;
+  cursor: pointer;
+}
+.field-select option { background: var(--black-3); color: var(--white); }
+.field-textarea { min-height: 100px; resize: vertical; }
+.field-hint { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; font-style: italic; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 28px 0;
+}
+
+/* SUBMIT */
+.submit-btn {
+  width: 100%;
+  padding: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Raleway', sans-serif;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+.submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+.submit-btn:active { transform: translateY(0); }
+
+.fine-print {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 16px;
+  line-height: 1.8;
+}
+
+/* SUCCESS */
+.success-box {
+  display: none;
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.success-emoji { font-size: 52px; margin-bottom: 24px; }
+.success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.success-msg {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.error-border { border-color: #e11d48 !important; }
+
+footer {
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 500px) {
+  .form-row { grid-template-columns: 1fr; }
+  .what-you-get { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">⚡ Agencies Charge $5,000+ For This — Yours Is $297 One-Time · 48-Hour Delivery</div>
+
+<div class="hero">
+  <div class="logo">The AI Docs Lab™</div>
+  <div class="badge">Coaches, Consultants &amp; Professionals</div>
+  <h1 class="hero-title">Your Clients Are Online Right Now.<br><span>Looking For Someone Like You.</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">This isn't another landing page. It's a system built different — engineered to put you in front of where clients are <strong>actually searching now</strong>, while everyone else is still optimizing for yesterday's internet. There's nothing else like it on the market. And once it's live, it works whether you're with a client, mid-project, or completely off the grid.</p>
+
+  <div class="price-box">
+    <p class="price-was">AGENCY VALUE $5,000+</p>
+    <p class="price-now">$297</p>
+    <p class="price-desc">One-Time Build Fee · You Own It Forever</p>
+    <p style="font-size:12px; color:var(--gold-light); margin-top:10px; letter-spacing:0.5px;">+ Free Domain &amp; First 30 Days Hosting Included<br><span style="color:rgba(255,255,255,0.7); font-size:11px;">After 30 days: host it anywhere you like, or let us host it for $10/mo — your choice, no lock-in</span></p>
+    <p style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:12px; line-height:1.6; max-width:380px; margin-left:auto; margin-right:auto; font-style:italic;">Every website on the internet has to be hosted somewhere — that's not a markup, that's just how the internet works. $10/mo covers your server costs, period. No software fee. No subscription to the tool itself. Ever.</p>
+  </div>
+
+  <div class="what-you-get">
+    <div class="get-item"><div class="get-dot"></div>Custom Landing Page</div>
+    <div class="get-item"><div class="get-dot"></div>Conversion Copy</div>
+    <div class="get-item"><div class="get-dot"></div>24/7 AI Chatbot</div>
+    <div class="get-item"><div class="get-dot"></div>Lead Capture Form</div>
+    <div class="get-item"><div class="get-dot"></div>Booking Integration</div>
+    <div class="get-item"><div class="get-dot"></div>Built For Tomorrow's Search</div>
+    <div class="get-item"><div class="get-dot"></div>Free Domain + 30 Days Hosting</div>
+  </div>
+
+  <div style="max-width:480px; margin:0 auto 20px; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.25); border-radius:8px; padding:20px 24px;">
+    <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:12px;">"Why So Cheap For $5,000+ Of Agency Value?"</p>
+    <p style="font-size:14px; color:rgba(255,255,255,0.7); line-height:1.8; margin-bottom:0;">Honest answer: this isn't agency pricing — there's no team, no overhead, no markup to cover. I build every page myself using the same AI-powered system I use for my own business, so I can deliver in 48 hours what an agency would charge $5,000+ and two-plus weeks to produce. The savings get passed directly to you. This isn't a gimmick or a countdown clock — it's a real chance to finally have the system that's been missing.</p>
+  </div>
+
+  <div style="max-width:480px; margin:0 auto 28px; background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.2); border-radius:8px; padding:20px 24px;">
+    <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:12px;">Already paying for a funnel platform?</p>
+    <p style="font-size:14px; color:rgba(255,255,255,0.65); line-height:1.8; margin-bottom:10px;">Most all-in-one CRM/funnel platforms charge $97&ndash;$297/month for the page builder alone &mdash; then bill the AI chatbot as a <em>separate</em> $97/month add-on on top of that, before any usage fees for texts or calls.</p>
+    <p style="font-size:14px; color:rgba(255,255,255,0.65); line-height:1.8; margin-bottom:10px;">And even then, most of those platforms only build for Google. They have no idea what it takes to get a page actually <em>found</em> by the AI tools people are asking for recommendations right now &mdash; ChatGPT, Claude, Perplexity. That's a different skillset entirely, and it's baked into every page I build.</p>
+    <p style="font-size:14px; color:var(--gold-light); font-weight:600; line-height:1.6;">That's $300&ndash;$400+ every single month, forever &mdash; for a page that's invisible to where search is actually heading.</p>
+  </div>
+
+  <div class="spots-bar">
+    <div class="spots-dot"></div>
+    <span>This is your chance to finally have the system — apply now</span>
+  </div>
+</div>
+
+<div class="form-container">
+  <div id="form-view">
+
+    <p style="text-align:center; font-size:13px; color:var(--gold-light); font-weight:600; letter-spacing:0.5px; margin-bottom:28px; line-height:1.7;">
+      Most professionals never get a system like this — not because it's rare or limited, but because most are still paying agency prices or monthly software fees for less. This is your chance to change that.
+    </p>
+
+    <div class="section-label">Your information</div>
+
+    <div class="form-row">
+      <div class="field-group">
+        <label class="field-label">First name *</label>
+        <input class="field-input" type="text" id="fname" placeholder="Sarah">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Last name *</label>
+        <input class="field-input" type="text" id="lname" placeholder="Johnson">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Email address *</label>
+      <input class="field-input" type="email" id="email" placeholder="sarah@yourbusiness.com">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Website or social link</label>
+      <input class="field-input" type="text" id="website" placeholder="instagram.com/yourhandle or yoursite.com">
+      <p class="field-hint">Helps me understand your current brand</p>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-label">Your business</div>
+
+    <div class="field-group">
+      <label class="field-label">Your niche or specialty *</label>
+      <input class="field-input" type="text" id="niche" placeholder="e.g. Business mindset coaching, Family law, Real estate, HVAC contracting">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Who is your ideal client? *</label>
+      <input class="field-input" type="text" id="client" placeholder="e.g. Women 35–50 who feel stuck in their careers, or homeowners needing emergency repairs">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Your main offer &amp; price *</label>
+      <input class="field-input" type="text" id="offer" placeholder="e.g. 90-day coaching program — $2,500, or Free consultation + $1,500 retainer">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Biggest result you get for clients *</label>
+      <textarea class="field-textarea" id="result" placeholder="e.g. My clients go from burned out corporate employees to launching their own businesses in 90 days — without quitting their job first. Or: We get homeowners back up and running within 24 hours of an emergency call."></textarea>
+      <p class="field-hint">Be specific — this becomes your headline</p>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-label">Final details</div>
+
+    <div class="field-group">
+      <label class="field-label">Biggest lead generation problem *</label>
+      <select class="field-select" id="problem">
+        <option value="">Select the one that hurts most...</option>
+        <option>I get traffic but nobody books a call</option>
+        <option>I don't know how to write copy that converts</option>
+        <option>I have no landing page at all</option>
+        <option>My page exists but generates zero leads</option>
+        <option>I rely 100% on referrals and need to change that</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Your booking link (Calendly or other)</label>
+      <input class="field-input" type="text" id="booking" placeholder="calendly.com/yourname">
+      <p class="field-hint">We'll embed this directly into your page</p>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Anything else I should know?</label>
+      <textarea class="field-textarea" id="notes" placeholder="Brand colors, tone of voice, what you've tried before, or anything that helps me build the perfect page for you..."></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.25); border-radius:8px; padding:24px; margin-bottom:24px;">
+      <p style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">Here's Exactly What Happens Next</p>
+      <p style="font-size:14px; color:rgba(255,255,255,0.7); line-height:1.8; margin-bottom:14px;">
+        I review every application personally — not a bot, not a VA, me. Within 24 hours you'll know you're confirmed. Once you are, your custom page goes live within 48 hours of our call. The only thing standing between you and a system that works while you sleep is deciding to actually apply.
+      </p>
+      <p style="font-size:14px; color:rgba(255,255,255,0.7); line-height:1.8; margin-bottom:0;">
+        <strong style="color:var(--gold-light);">Zero risk to find out:</strong> if I review your application and don't believe I can build you a page that converts, I'll tell you honestly and refund your spot instantly — no hard feelings, no hoops. You either get a system that works while you sleep, or you get your money back. There's no version of this where you lose.
+      </p>
+    </div>
+
+    <button class="submit-btn" onclick="submitForm()">Yes — Apply For My $297 Page Now &rarr;</button>
+    <p class="fine-print">
+      Dr. Eric reviews every application personally.<br>
+      You'll hear back within 24 hours to confirm your spot and get started.<br>
+      <strong style="color:rgba(255,255,255,0.6);">The AI Docs Lab™ &bull; theaidocslab.com</strong>
+    </p>
+    <p class="fine-print" style="margin-top:18px; font-style:italic;">
+      P.S. — Some professionals will have this system live by this time next week, qualifying leads while they sleep. Others will still be posting and hoping. The only real difference between them is who decided to click "Apply." You just finished reading the whole page — that's not nothing.
+    </p>
+
+  </div>
+
+  <div class="success-box" id="success-view">
+    <div class="success-emoji">⚡</div>
+    <h2 class="success-title">Application Received.</h2>
+    <p class="success-msg">Dr. Eric reviews every submission personally and will reach out within 24 hours to confirm your spot and get your page started.<br><br>Check your inbox — your page is coming.</p>
+  </div>
+</div>
+
+<!-- Hidden Netlify form -->
+<form name="coach-application" netlify netlify-honeypot="bot-field" hidden>
+  <input name="bot-field">
+  <input name="first-name">
+  <input name="last-name">
+  <input name="email">
+  <input name="website">
+  <input name="niche">
+  <input name="ideal-client">
+  <input name="offer">
+  <textarea name="biggest-result"></textarea>
+  <select name="lead-problem"></select>
+  <input name="booking-link">
+  <textarea name="additional-notes"></textarea>
+</form>
+
+<footer>&copy; 2026 The AI Docs Lab™ &bull; All Rights Reserved</footer>
+
+<script>
+function submitForm() {
+  const required = ['fname','lname','email','niche','client','offer','result','problem'];
+  let missing = false;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.classList.add('error-border');
+      missing = true;
+    } else {
+      el.classList.remove('error-border');
+    }
+  });
+  if (missing) {
+    alert('Please fill in all required fields marked with *');
+    return;
+  }
+  const formData = new FormData();
+  formData.append('form-name', 'coach-application');
+  formData.append('first-name', document.getElementById('fname').value);
+  formData.append('last-name', document.getElementById('lname').value);
+  formData.append('email', document.getElementById('email').value);
+  formData.append('website', document.getElementById('website').value);
+  formData.append('niche', document.getElementById('niche').value);
+  formData.append('ideal-client', document.getElementById('client').value);
+  formData.append('offer', document.getElementById('offer').value);
+  formData.append('biggest-result', document.getElementById('result').value);
+  formData.append('lead-problem', document.getElementById('problem').value);
+  formData.append('booking-link', document.getElementById('booking').value);
+  formData.append('additional-notes', document.getElementById('notes').value);
+
+  fetch('/', {
+    method: 'POST',
+    body: formData
+  }).then(() => {
+    document.getElementById('form-view').style.display = 'none';
+    document.getElementById('success-view').style.display = 'block';
+    window.scrollTo(0, 0);
+  }).catch(() => {
+    document.getElementById('form-view').style.display = 'none';
+    document.getElementById('success-view').style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+}
+</script>
+</body>
+</html>
