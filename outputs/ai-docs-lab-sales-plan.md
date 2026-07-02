@@ -10,6 +10,14 @@ Right now the funnel is: content → 8-field application. That's too big a jump 
 
 This is the single highest-leverage change identified across all four agents. Everything below is built around making that proof step real and getting the right people to it.
 
+## The Two Proven Components (Name Them Separately, Not as One Vague "AI-Powered" Claim)
+Every page ships with two distinct working pieces of technology — both tested, not just claimed:
+
+1. **The AI crawler plugin** — makes the page discoverable/indexed by AI search engines and assistants (ChatGPT, Claude, Gemini, Perplexity), not just Google. This is the piece confirmed working today: a Gemini search for a 3PL/warehousing provider at the Freeport Center surfaced the Oborn Transfer & Storage page, which carries The AI Docs Lab's footer credit.
+2. **The trained AI chatbot** — answers visitor questions about the specific business 24/7, embedded directly on the page.
+
+Marketing content and proof beats should name these as two separate, specific things a coach is getting — not one blurry "AI-powered" adjective. Specific and named reads as more credible to a skeptical, previously-burned audience than a generic claim.
+
 ## Audience & Positioning
 - **Who:** Coaches/consultants with real client results but a landing page that isn't working (or no page at all) — not total beginners; they already have an offer and a niche.
 - **What they're guarding against:** Being sold another version of a funnel platform or guru product that didn't deliver. The page's own "why so cheap" and "already paying for a funnel platform" sections exist because the founder already anticipated this.
@@ -38,7 +46,7 @@ A new, small asset — not a redesign of the application page. A public example 
 
 **Structure:** Hook (0:00–0:20) → name the pain using the form's own language (0:20–0:50) → show the real page (0:50–1:30) → live unscripted chatbot demo (1:30–2:15) → live AI-search demo, the strongest proof beat (2:15–3:00) → visual cost comparison (3:00–3:30) → Dr. Eric on camera, personal-review promise (3:30–3:50) → direct CTA to the live demo, not straight to the application (3:50–4:10).
 
-**Proof Beat 3, now concrete and real:** open a fresh Gemini tab, type a real query someone would use ("who does 3PL/warehousing at the Freeport Center" or similar), let it recommend Oborn Transfer & Storage on screen, then click through to oborn.com and scroll to the footer where The AI Docs Lab's credit is visible. Say plainly on camera: "This is a real client site, this is a real AI recommendation, and yes — it's a logistics company, not a coach, because that's who I built this one for. The same system is what would get built for you, in your niche." Naming the mismatch honestly is stronger than hiding it — it reads as more credible to a skeptical audience than a proof clip that quietly hopes nobody notices.
+**Proof Beat 3, now concrete and real:** open a fresh Gemini tab, type a real query someone would use ("who does 3PL/warehousing at the Freeport Center" or similar), let it recommend Oborn Transfer & Storage on screen, then click through to oborn.com and scroll to the footer where The AI Docs Lab's credit is visible. Say plainly on camera: "This is a real client site, this is a real AI recommendation, and yes — it's a logistics company, not a coach, because that's who I built this one for. The same system is what would get built for you, in your niche." Naming the mismatch honestly is stronger than hiding it — it reads as more credible to a skeptical audience than a proof clip that quietly hopes nobody notices. Name the mechanism specifically on camera too: "This works because of the AI crawler plugin built into every page — it's what gets you found by ChatGPT, Claude, Gemini, and Perplexity, not just Google."
 
 **Short-form cutdowns:** chatbot proof clip, AI-search proof clip (strongest for cold audiences — nobody else is making this claim), cost-comparison + CTA clip, and the hook/pain clip using dropdown-language as on-screen text.
 
