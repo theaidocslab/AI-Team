@@ -22,11 +22,11 @@ A new, small asset — not a redesign of the application page. A public example 
 ## Proof To Capture (in priority order)
 1. A real example page shown on screen (or the live demo above).
 2. The chatbot answering a real, unscripted question — live, unedited.
-3. An actual ChatGPT/Claude/Perplexity search surfacing a built page — demonstrated, not claimed.
+3. **CONFIRMED, real, available now:** an actual Gemini search surfaced a client site — **oborn.com (Oborn Transfer & Storage)** — when asked about 3PL/warehousing providers at the Freeport Center, and the site carries The AI Docs Lab's footer credit. This is real, verifiable proof of the AI-search-discoverability claim. One honest caveat: this client is in logistics/3PL, not coaching — it proves the mechanism works, but it isn't yet a coach-specific example. Use it now as the strongest available proof; swap in a coaching-niche client the moment one exists.
 4. Dr. Eric's face and voice on camera saying he reviews every application personally.
 5. Build speed shown (application → live page), not just stated.
 6. A visual cost comparison: $300–400+/mo forever vs. $297 once.
-7. As soon as real clients exist: name them. The first 1-3 delivered pages become the most valuable content asset this business has.
+7. **Oborn Transfer & Storage is now that first named result.** Prioritize getting a coaching or consulting client's page live next — a niche-matched example will land harder with this specific audience than a logistics one.
 
 ## Content: The Proof Video
 **Best title:** "I Let ChatGPT Find My Client's Website (Watch This)"
@@ -37,6 +37,8 @@ A new, small asset — not a redesign of the application page. A public example 
 **Hook (word for word):** *"If you're a coach and your website has never actually gotten you a client — this isn't another 'here's what you should do' video. I'm going to show you a real page, built for a real coach, and then I'm going to ask ChatGPT to find her. Live. No script. If this doesn't convince you, nothing will — so just watch."*
 
 **Structure:** Hook (0:00–0:20) → name the pain using the form's own language (0:20–0:50) → show the real page (0:50–1:30) → live unscripted chatbot demo (1:30–2:15) → live AI-search demo, the strongest proof beat (2:15–3:00) → visual cost comparison (3:00–3:30) → Dr. Eric on camera, personal-review promise (3:30–3:50) → direct CTA to the live demo, not straight to the application (3:50–4:10).
+
+**Proof Beat 3, now concrete and real:** open a fresh Gemini tab, type a real query someone would use ("who does 3PL/warehousing at the Freeport Center" or similar), let it recommend Oborn Transfer & Storage on screen, then click through to oborn.com and scroll to the footer where The AI Docs Lab's credit is visible. Say plainly on camera: "This is a real client site, this is a real AI recommendation, and yes — it's a logistics company, not a coach, because that's who I built this one for. The same system is what would get built for you, in your niche." Naming the mismatch honestly is stronger than hiding it — it reads as more credible to a skeptical audience than a proof clip that quietly hopes nobody notices.
 
 **Short-form cutdowns:** chatbot proof clip, AI-search proof clip (strongest for cold audiences — nobody else is making this claim), cost-comparison + CTA clip, and the hook/pain clip using dropdown-language as on-screen text.
 
