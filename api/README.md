@@ -5,7 +5,10 @@ This is a small server that keeps your Groq API key secret while letting the dem
 ## What's here
 
 - `functions/chat.js` — the actual server code (a "Netlify Function" — a small program that only runs when someone calls it, so there's no server to keep running 24/7).
-- `netlify.toml` — tells Netlify where the function lives and sets up a shorter URL (`/chat` instead of the longer default path).
+- `functions/track.js` — records a page visit every time someone loads the demo page (just the URL path and the referring site, nothing personal).
+- `functions/stats.js` — a simple dashboard showing that traffic: today / this week / all-time, a 7-day chart, top pages, and top traffic sources. View it at `https://api.theaidocslab.com/stats`. It has no login — don't link to it publicly, just bookmark the URL.
+- `netlify.toml` — tells Netlify where the functions live and sets up short URLs (`/chat`, `/track`, `/stats`).
+- `package.json` — lists `@netlify/blobs`, the storage Netlify gives every site for free, used here to remember visit counts between page loads.
 
 ## How to deploy this (one-time setup)
 
@@ -16,6 +19,8 @@ This is a small server that keeps your Groq API key secret while letting the dem
    - Add a variable named `GROQ_API_KEY` with your actual key as the value
    - (Optional) Add `GROQ_MODEL` if you want to use a different Groq model than the default (`llama-3.3-70b-versatile`) — check Groq's console for current available model names, since they change over time.
 4. **Deploy.** Netlify will build and your function will be live at `https://api.theaidocslab.com/chat`.
+
+Since `track.js` and `stats.js` were added after the first deploy, this site needs to **redeploy** to pick them up — if it's connected to this GitHub repo, pushing to the branch should trigger that automatically. If not, trigger a manual deploy from the Netlify dashboard (Deploys → Trigger deploy). This deploy also needs to run `npm install` to pick up the new `@netlify/blobs` dependency — Netlify does this automatically when it sees `package.json`, no action needed on your part beyond redeploying.
 
 ## How the demo page uses this
 

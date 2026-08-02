@@ -862,6 +862,16 @@ footer a { color: var(--gold-light); text-decoration: none; }
 </div>
 
 <script>
+(function trackPageview() {
+  try {
+    fetch('https://api.theaidocslab.com/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: location.pathname, referrer: document.referrer })
+    }).catch(function () {});
+  } catch (e) {}
+})();
+
 const responses = [
   {
     keywords: ['include', 'included', 'program', 'what do i get', 'reboot'],
