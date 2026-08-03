@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "/live-demo-coach.html"
+  status = 200
