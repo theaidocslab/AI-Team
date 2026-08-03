@@ -1,0 +1,121 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Raleway';
+      src: url('assets/fonts/raleway.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .clip {
+      will-change: opacity;
+    }
+
+    .02-pain-bg {
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A; /* text-primary used as the flat ground — Scene 1 */
+    }
+
+    .02-pain-card {
+      position: absolute;
+      left: calc(50% - 15cqw);
+      top: 34cqh;
+      width: 30cqw;
+      padding: 3cqw 4cqw;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.3); /* white-overlay */
+      border: 0.07cqw solid #C9A84C; /* line */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2cqw;
+    }
+
+    .02-pain-field {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1cqw;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .02-pain-label {
+      position: absolute;
+      left: calc(50% - 15cqw);
+      top: 58cqh;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E8C97A; /* accent — the taupe label token */
+    }
+  </style>
+
+  <div id="root" data-composition-id="02-pain" data-width="1920" data-height="1080" data-duration="7.488">
+    <div
+      id="02-pain-bg"
+      class="clip"
+      data-start="0"
+      data-duration="7.488"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="02-pain-card"
+      class="clip"
+      data-start="0"
+      data-duration="7.488"
+      data-track-index="1"
+    >
+      <div class="02-pain-field">Name</div>
+      <div class="02-pain-field">Email</div>
+    </div>
+
+    <div
+      id="02-pain-label"
+      class="clip"
+      data-start="1.4"
+      data-duration="1.2"
+      data-track-index="2"
+    >NO CONTEXT</div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    const card = document.getElementById('02-pain-card');
+    const label = document.getElementById('02-pain-label');
+
+    // Scene 1 (0.0–1.4s) — bare two-field card fades in dead-center on the flat ground.
+    tl.fromTo(
+      card,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.8, ease: 'power2.out' },
+      0
+    );
+
+    // Scene 2 (1.4–2.6s) — discrete-text-sequence: whole-state hard cut at a time
+    // threshold, no fade/slide between states (mechanics per the inlined rule recipe).
+    tl.set(label, { textContent: 'NO CONTEXT' }, 1.4);
+    tl.set(label, { textContent: 'NO QUALIFYING' }, 2.0);
+
+    // Scene 3 (2.6s → hold) — labels clear (clip window ends at 2.6s), the bare form
+    // card fades to a 50% "shrug" and holds still to the cut.
+    tl.to(card, { opacity: 0.5, duration: 0.5, ease: 'power1.inOut' }, 2.6);
+
+    window.__timelines['02-pain'] = tl;
+  </script>
+</template>

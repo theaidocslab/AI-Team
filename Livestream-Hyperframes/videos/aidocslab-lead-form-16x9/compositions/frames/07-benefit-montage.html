@@ -1,0 +1,139 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Playfair Display", serif;
+    }
+
+    .c07-benefit-montage-bg {
+      position: absolute;
+      inset: 0;
+      background-color: #0a0a0a; /* text-primary — reversed-on-dark ground for this beat */
+    }
+
+    .c07-benefit-montage-flash {
+      position: absolute;
+      inset: 0;
+      background-color: #ffffff; /* bg-primary */
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .c07-benefit-montage-phrase {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 184px; /* keep-out: bottom ~17% of 1080 reserved for captions */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 7cqw;
+    }
+
+    .c07-benefit-montage-text {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      color: #ffffff; /* bg-primary, reversed for legibility on the dark ground */
+      margin: 0;
+    }
+
+    .c07-benefit-montage-text--display {
+      font-size: 8cqw;
+      line-height: 1.04;
+      letter-spacing: 0.01em;
+    }
+
+    .c07-benefit-montage-text--h2 {
+      font-size: 4cqw;
+      line-height: 1.12;
+      max-width: 78cqw;
+      letter-spacing: 0.005em;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="07-benefit-montage"
+    data-width="1920"
+    data-height="1080"
+    data-duration="5.12"
+  >
+    <div
+      class="clip c07-benefit-montage-bg"
+      id="c07-bg"
+      data-start="0"
+      data-duration="5.12"
+      data-track-index="0"
+    ></div>
+
+    <!-- Scene 1 (0.0–1.4s): "HIGHER CONVERSION" hard-cuts in dead-center, no fade/slide -->
+    <div
+      class="clip c07-benefit-montage-phrase"
+      id="c07-phrase-1"
+      data-start="0"
+      data-duration="1.38"
+      data-track-index="1"
+    >
+      <p class="c07-benefit-montage-text c07-benefit-montage-text--display">HIGHER CONVERSION</p>
+    </div>
+
+    <!-- Scene 2 (1.4–2.9s): hard cut clears it; "ZERO MANUAL ENTRY" replaces it, same treatment -->
+    <div
+      class="clip c07-benefit-montage-phrase"
+      id="c07-phrase-2"
+      data-start="1.4"
+      data-duration="1.48"
+      data-track-index="1"
+    >
+      <p class="c07-benefit-montage-text c07-benefit-montage-text--display">ZERO MANUAL ENTRY</p>
+    </div>
+
+    <!-- Scene 3 (2.9s–end): hard cut clears it; "CALLS THAT ARE ALREADY QUALIFIED" lands and HOLDS -->
+    <div
+      class="clip c07-benefit-montage-phrase"
+      id="c07-phrase-3"
+      data-start="2.9"
+      data-duration="2.22"
+      data-track-index="1"
+    >
+      <p class="c07-benefit-montage-text c07-benefit-montage-text--h2">CALLS THAT ARE ALREADY QUALIFIED</p>
+    </div>
+
+    <div
+      class="clip c07-benefit-montage-flash"
+      id="c07-flash"
+      data-start="0"
+      data-duration="5.12"
+      data-track-index="2"
+    ></div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="07-benefit-montage"]');
+      var flash = root.querySelector(".c07-benefit-montage-flash");
+
+      var tl = gsap.timeline({ paused: true });
+
+      // A brief white flash punctuates each hard cut — the "flash" in flash-word-swap.
+      var cutTimes = [0, 1.4, 2.9];
+      cutTimes.forEach(function (t) {
+        tl.fromTo(
+          flash,
+          { opacity: 0.55 },
+          { opacity: 0, duration: 0.14, ease: "power1.out" },
+          t
+        );
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["07-benefit-montage"] = tl;
+    })();
+  </script>
+</template>
