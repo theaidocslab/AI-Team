@@ -1,0 +1,177 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Raleway";
+      src: url("assets/fonts/raleway.woff2") format("woff2");
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Raleway", sans-serif;
+    }
+
+    .clip {
+      position: absolute;
+    }
+
+    /* full-bleed ground — dedicated clip layer, never painted on #root */
+    .pain02-bg {
+      inset: 0;
+      background: #0a0a0a;
+    }
+
+    /* compass-drafted atmosphere ring behind the artifact */
+    .pain02-ring {
+      top: 46%;
+      left: 50%;
+      width: 60cqw;
+      height: 60cqw;
+      margin-left: -30cqw;
+      margin-top: -30cqw;
+      border: 0.07cqw solid #c9a84c;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    .pain02-ring::before {
+      content: "";
+      position: absolute;
+      inset: 13%;
+      border: 0.07cqw dashed #c9a84c;
+      border-radius: 50%;
+    }
+
+    /* the bare, unimpressive two-field form artifact */
+    .pain02-card {
+      top: 46%;
+      left: 50%;
+      width: 44cqw;
+      height: 30cqh;
+      margin-left: -22cqw;
+      margin-top: -15cqh;
+      background: rgba(255, 255, 255, 0.3);
+      border: 0.07cqw solid #c9a84c;
+      display: flex;
+      flex-direction: column;
+    }
+    .pain02-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 4cqw;
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e8c97a;
+    }
+    .pain02-field + .pain02-field {
+      border-top: 0.07cqw solid #c9a84c;
+    }
+
+    /* the hard-cut pain callouts — left-aligned to the card's edge */
+    .pain02-pain-label {
+      top: 64.7%;
+      left: 28cqw;
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e8c97a;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="02-pain"
+    data-width="1080"
+    data-height="1080"
+    data-duration="7.488"
+  >
+    <div
+      class="clip pain02-bg"
+      data-start="0"
+      data-duration="7.488"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="clip pain02-ring"
+      data-start="0"
+      data-duration="7.488"
+      data-track-index="1"
+    ></div>
+
+    <div
+      id="pain02-card"
+      class="clip pain02-card"
+      data-start="0"
+      data-duration="7.488"
+      data-track-index="2"
+    >
+      <div class="pain02-field">Name</div>
+      <div class="pain02-field">Email</div>
+    </div>
+
+    <!-- Scene 2: hard-cut token swap — "No context" -->
+    <div
+      class="clip pain02-pain-label"
+      data-start="1.4"
+      data-duration="0.6"
+      data-track-index="3"
+    >
+      No context
+    </div>
+
+    <!-- Scene 2: hard-cut token swap — "No qualifying" (instant replacement, no fade/slide) -->
+    <div
+      class="clip pain02-pain-label"
+      data-start="2.0"
+      data-duration="0.6"
+      data-track-index="4"
+    >
+      No qualifying
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    const pain02Card = document.getElementById("pain02-card");
+    const pain02Ring = document.querySelector(".pain02-ring");
+
+    // Scene 1 — bare form fades in dead-center, hero visible well before 0.5s.
+    tl.fromTo(
+      pain02Card,
+      { opacity: 0, scale: 0.94 },
+      { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" },
+      0,
+    );
+
+    // Ambient compass ring drifts into view alongside the artifact.
+    tl.fromTo(
+      pain02Ring,
+      { opacity: 0 },
+      { opacity: 0.28, duration: 0.9, ease: "power1.out" },
+      0,
+    );
+
+    // Scene 3 — "Just noise": the labels clear (native clip window) and the
+    // bare form itself fades to a 50% shrug, holding still through the cut.
+    tl.to(
+      pain02Card,
+      { opacity: 0.5, duration: 0.35, ease: "power1.out" },
+      2.6,
+    );
+
+    window.__timelines["02-pain"] = tl;
+  </script>
+</template>

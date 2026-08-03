@@ -1,0 +1,199 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Raleway';
+      src: url('assets/fonts/raleway.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .clip {
+      will-change: opacity;
+    }
+
+    .01-hook-bg {
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A; /* text-primary used as the flat, bare ground */
+    }
+
+    .01-hook-stage {
+      position: absolute;
+      left: 50%;
+      top: 36cqh;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.2cqw;
+    }
+
+    .01-hook-counter-wrap {
+      position: relative;
+      width: 54cqw;
+      height: 24cqw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .01-hook-counter-live,
+    .01-hook-counter-split {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      font-size: 20cqw;
+      line-height: 1;
+      color: #FFFFFF; /* bg-primary used as the counter's ink on the black ground */
+      transform-origin: center center;
+    }
+
+    .01-hook-counter-live {
+      display: inline-block;
+    }
+
+    .01-hook-counter-split {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0; /* revealed at the crossfade, per recipe convention */
+    }
+
+    .01-hook-digit-dim {
+      display: inline-block;
+    }
+
+    .01-hook-digit-lit-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .01-hook-digit-lit {
+      display: inline-block;
+      text-shadow: 0 0 0px rgba(232, 201, 122, 0);
+      transform-origin: center center;
+    }
+
+    .01-hook-hairline {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.08em;
+      height: 0.3cqw;
+      background: #C9A84C; /* line */
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .01-hook-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E8C97A; /* accent */
+      opacity: 0;
+    }
+  </style>
+
+  <div id="root" data-composition-id="01-hook" data-width="1080" data-height="1080" data-duration="3.2">
+    <div
+      class="01-hook-bg clip"
+      data-start="0"
+      data-duration="3.2"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="01-hook-stage clip"
+      data-start="0"
+      data-duration="3.2"
+      data-track-index="1"
+    >
+      <div class="01-hook-counter-wrap">
+        <span class="01-hook-counter-live" id="01-hook-counter">0</span>
+        <span class="01-hook-counter-split">
+          <span class="01-hook-digit-dim" id="01-hook-digit-dim">12</span><span class="01-hook-digit-lit-wrap"><span class="01-hook-digit-lit" id="01-hook-digit-lit">8</span><span class="01-hook-hairline" id="01-hook-hairline"></span></span>
+        </span>
+      </div>
+      <div class="01-hook-label" id="01-hook-label">Site Visitors</div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    const counterLive = document.getElementById('01-hook-counter');
+    const counterSplit = document.querySelector('.01-hook-counter-split');
+    const digitDim = document.getElementById('01-hook-digit-dim');
+    const digitLit = document.getElementById('01-hook-digit-lit');
+    const hairline = document.getElementById('01-hook-hairline');
+    const label = document.getElementById('01-hook-label');
+
+    // Scene 1 (0.0–1.28s) — counting-dynamic-scale: proxy value counts 0 → 128
+    // (power3.out, quick and clean) while the counter's transform scale grows to
+    // its static final size — same ease, same duration, one beat.
+    const TARGET_VALUE = 128;
+    const START_SCALE = 0.5;
+    const COUNT_DUR = 1.28;
+    const state = { value: 0 };
+
+    tl.to(
+      state,
+      {
+        value: TARGET_VALUE,
+        duration: COUNT_DUR,
+        ease: 'power3.out',
+        onUpdate: () => {
+          counterLive.textContent = Math.round(state.value).toLocaleString();
+        },
+      },
+      0
+    );
+    tl.fromTo(
+      counterLive,
+      { scale: START_SCALE },
+      { scale: 1, duration: COUNT_DUR, ease: 'power3.out' },
+      0
+    );
+
+    // Label arrives early, before the count peaks.
+    tl.fromTo(
+      label,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+      0.15
+    );
+
+    // Scene 2 (1.28–2.24s) — on "Did you know?" the landed number crossfades into
+    // its split form, then most of it dims to text-secondary while the remaining
+    // digit-group lights accent gold and draws its own thin gold hairline. No camera move.
+    tl.to(counterLive, { opacity: 0, duration: 0.22, ease: 'power1.inOut' }, COUNT_DUR);
+    tl.to(counterSplit, { opacity: 1, duration: 0.22, ease: 'power1.inOut' }, COUNT_DUR);
+
+    tl.to(digitDim, { color: '#5A5A5A', duration: 0.5, ease: 'power2.out' }, COUNT_DUR + 0.12);
+    tl.to(digitLit, { color: '#E8C97A', duration: 0.5, ease: 'power2.out' }, COUNT_DUR + 0.12);
+    tl.to(hairline, { scaleX: 1, duration: 0.5, ease: 'power2.out' }, COUNT_DUR + 0.12);
+
+    // Scene 3 (2.24–3.2s) — hold. The dimmed majority stays static; the lit
+    // fragment holds a barely-perceptible glow pulse (subtle jitter only).
+    const HOLD_START = 2.24;
+    tl.to(digitLit, { textShadow: '0 0 22px rgba(232,201,122,0.9)', scale: 1.02, duration: 0.32, ease: 'sine.inOut' }, HOLD_START);
+    tl.to(digitLit, { textShadow: '0 0 6px rgba(232,201,122,0.35)', scale: 0.995, duration: 0.32, ease: 'sine.inOut' }, HOLD_START + 0.32);
+    tl.to(digitLit, { textShadow: '0 0 16px rgba(232,201,122,0.7)', scale: 1.01, duration: 0.32, ease: 'sine.inOut' }, HOLD_START + 0.64);
+
+    window.__timelines['01-hook'] = tl;
+  </script>
+</template>

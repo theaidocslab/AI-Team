@@ -134,18 +134,21 @@
 
     // Scene 2 (1.6-2.3s): the numeral splits — majority dims to gray, one digit-group
     // stays gold-lit, underlined by a thin gold hairline. No camera move.
-    tl.to(
+    tl.fromTo(
       "#hook01-dim",
+      { color: "#ffffff" },
       { color: "#5a5a5a", duration: 0.5, ease: "power2.out" },
       1.6,
     );
-    tl.to(
+    tl.fromTo(
       "#hook01-gold",
+      { color: "#ffffff" },
       { color: "#e8c97a", duration: 0.5, ease: "power2.out" },
       1.6,
     );
-    tl.to(
+    tl.fromTo(
       "#hook01-underline",
+      { scaleX: 0 },
       { scaleX: 1, duration: 0.4, ease: "power2.out" },
       1.85,
     );
@@ -187,7 +190,7 @@
         ease: "none",
         onUpdate: () => {
           const jx = Math.sin(hook01JitterPhase.p * 1.0) * 1.2;
-          const jy = Math.sin(hook01JitterPhase.p * 1.7 + 1.0) * 1.0;
+          const jy = Math.sin(hook01JitterPhase.p * 1.7) * 1.0;
           hook01GoldWrapEl.style.transform = `translate(${jx}px, ${jy}px)`;
         },
       },

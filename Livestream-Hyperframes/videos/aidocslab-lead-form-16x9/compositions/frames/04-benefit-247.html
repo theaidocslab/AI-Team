@@ -1,0 +1,409 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Raleway';
+      src: url('assets/fonts/raleway.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .clip {
+      will-change: opacity;
+    }
+
+    /* backdrop — role: background. Day ground + a night overlay that dims to darkest. */
+    .04-benefit-247-bg-day {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF; /* bg-primary */
+    }
+
+    .04-benefit-247-bg-night {
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A; /* text-primary — ink, used as the "night" tone */
+    }
+
+    /* compass-drafted ring — the blueprint's accent shape resolving behind the surface */
+    .04-benefit-247-ring {
+      position: absolute;
+      left: 640px;
+      top: 220px;
+      width: 640px;
+      height: 640px;
+      border-radius: 50%;
+      border: 1px solid #C9A84C; /* line */
+      box-sizing: border-box;
+    }
+
+    .04-benefit-247-ring::before {
+      content: '';
+      position: absolute;
+      inset: 12.5%;
+      border-radius: 50%;
+      border: 1px dashed #C9A84C; /* line */
+    }
+
+    /* thin top-edge time strip — role: time-indicator (supporting) */
+    .04-benefit-247-strip {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 6px;
+    }
+
+    .04-benefit-247-strip-day {
+      position: absolute;
+      inset: 0;
+      background: #EEE3C5; /* bg-secondary — "day" tone */
+    }
+
+    .04-benefit-247-strip-night {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0A0A0A 0%, #0A0A0A 82%, rgba(10, 10, 10, 0) 100%);
+    }
+
+    /* label chrome — a small floating badge overlapping the card's top edge */
+    .04-benefit-247-chrome {
+      position: absolute;
+      left: 840px;
+      top: 223px;
+      width: 240px;
+      height: 34px;
+      box-sizing: border-box;
+      border: 0.07cqw solid #C9A84C; /* line */
+      background: rgba(255, 255, 255, 0.3); /* white-overlay */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .04-benefit-247-chrome-text {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E8C97A; /* accent */
+    }
+
+    /* the reconstructed lead-capture-form card — role: form-surface (cutout) */
+    .04-benefit-247-card {
+      position: absolute;
+      left: 530px;
+      top: 240px;
+      width: 860px;
+      height: 600px;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.3); /* white-overlay */
+      border: 0.07cqw solid #C9A84C; /* line */
+      padding: 48px 56px;
+    }
+
+    .04-benefit-247-card-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .04-benefit-247-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E8C97A; /* accent */
+    }
+
+    .04-benefit-247-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 2cqw;
+      line-height: 1.15;
+      color: #0A0A0A; /* text-primary */
+      margin: 18px 0 34px;
+    }
+
+    .04-benefit-247-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 30px;
+    }
+
+    .04-benefit-247-field {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 0.07cqw solid #C9A84C; /* line — the hairline "input" */
+    }
+
+    .04-benefit-247-field--full {
+      margin-bottom: 0;
+    }
+
+    .04-benefit-247-field-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #5A5A5A; /* text-secondary */
+    }
+
+    .04-benefit-247-field-ghost {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.4cqw; /* legibility floor — this is read as real (placeholder) content */
+      color: #5A5A5A; /* text-secondary */
+      opacity: 0.55;
+    }
+
+    /* the "always on" pulse — accent gold dot at the card's corner */
+    .04-benefit-247-dot {
+      position: absolute;
+      left: 1381px;
+      top: 231px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #E8C97A; /* accent */
+      border: 1px solid #C9A84C; /* line */
+      box-sizing: border-box;
+    }
+
+    .04-benefit-247-live-label {
+      position: absolute;
+      left: 1290px;
+      top: 228px;
+      width: 80px;
+      text-align: right;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #E8C97A; /* accent */
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="04-benefit-247"
+    data-width="1920"
+    data-height="1080"
+    data-duration="4.373"
+  >
+    <div
+      id="04-benefit-247-bg-day"
+      class="clip 04-benefit-247-bg-day"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="04-benefit-247-bg-night"
+      class="clip 04-benefit-247-bg-night"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="1"
+    ></div>
+
+    <div
+      id="04-benefit-247-ring"
+      class="clip 04-benefit-247-ring"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="2"
+    ></div>
+
+    <div
+      id="04-benefit-247-strip"
+      class="clip 04-benefit-247-strip"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="3"
+    >
+      <div id="04-benefit-247-strip-day" class="04-benefit-247-strip-day"></div>
+      <div id="04-benefit-247-strip-night" class="04-benefit-247-strip-night"></div>
+    </div>
+
+    <div
+      id="04-benefit-247-chrome"
+      class="clip 04-benefit-247-chrome"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="4"
+    >
+      <span class="04-benefit-247-chrome-text">Always On</span>
+    </div>
+
+    <div
+      id="04-benefit-247-card"
+      class="clip 04-benefit-247-card"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="5"
+    >
+      <div class="04-benefit-247-card-inner">
+        <span id="04-benefit-247-eyebrow" class="04-benefit-247-eyebrow">Lead Capture Form</span>
+        <h3 id="04-benefit-247-headline" class="04-benefit-247-headline">Your information</h3>
+
+        <div id="04-benefit-247-row-names" class="04-benefit-247-row">
+          <div class="04-benefit-247-field">
+            <span class="04-benefit-247-field-label">First name *</span>
+            <span class="04-benefit-247-field-ghost">Sarah</span>
+          </div>
+          <div class="04-benefit-247-field">
+            <span class="04-benefit-247-field-label">Last name *</span>
+            <span class="04-benefit-247-field-ghost">Johnson</span>
+          </div>
+        </div>
+
+        <div id="04-benefit-247-row-email" class="04-benefit-247-row">
+          <div class="04-benefit-247-field 04-benefit-247-field--full">
+            <span class="04-benefit-247-field-label">Email address *</span>
+            <span class="04-benefit-247-field-ghost">sarah@yourbusiness.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="04-benefit-247-dot" class="04-benefit-247-dot"></div>
+      <span id="04-benefit-247-live-label" class="04-benefit-247-live-label">Live</span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var bgNight = document.getElementById('04-benefit-247-bg-night');
+      var ring = document.getElementById('04-benefit-247-ring');
+      var card = document.getElementById('04-benefit-247-card');
+      var chrome = document.getElementById('04-benefit-247-chrome');
+      var eyebrow = document.getElementById('04-benefit-247-eyebrow');
+      var headline = document.getElementById('04-benefit-247-headline');
+      var rowNames = document.getElementById('04-benefit-247-row-names');
+      var rowEmail = document.getElementById('04-benefit-247-row-email');
+      var stripNight = document.getElementById('04-benefit-247-strip-night');
+      var dot = document.getElementById('04-benefit-247-dot');
+      var liveLabel = document.getElementById('04-benefit-247-live-label');
+
+      var tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0.0–1.5s): the ring "resolves" behind the surface (spring overshoot),
+      // then the form card slides up from below and settles — static-tour signature.
+      tl.fromTo(
+        ring,
+        { opacity: 0, scale: 0.7 },
+        { opacity: 0.32, scale: 1, duration: 0.85, ease: 'back.out(1.5)', transformOrigin: '50% 50%' },
+        0.05
+      );
+
+      tl.fromTo(
+        card,
+        { y: 90, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power2.out' },
+        0.15
+      );
+
+      // The card's own chrome builds in staggered beats — never front-loaded — as the
+      // surface settles: label chrome badge, eyebrow, headline, then the field rows.
+      tl.fromTo(
+        chrome,
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+        1.0
+      );
+
+      tl.fromTo(
+        eyebrow,
+        { y: 10, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' },
+        1.05
+      );
+
+      tl.fromTo(
+        headline,
+        { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+        1.15
+      );
+
+      tl.fromTo(
+        rowNames,
+        { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' },
+        1.28
+      );
+
+      tl.fromTo(
+        rowEmail,
+        { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' },
+        1.4
+      );
+
+      // Scene 2 (1.5–3.0s): as "24/7" lands, the top-edge strip sweeps day→night
+      // left-to-right while the backdrop dims in step; the corner dot appears and
+      // begins its steady "always on" breathing.
+      tl.fromTo(
+        stripNight,
+        { width: '0%' },
+        { width: '100%', duration: 1.4, ease: 'none' },
+        1.5
+      );
+
+      tl.fromTo(
+        bgNight,
+        { opacity: 0 },
+        { opacity: 0.85, duration: 1.4, ease: 'none' },
+        1.5
+      );
+
+      tl.fromTo(
+        dot,
+        { opacity: 0, scale: 0.3 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)', transformOrigin: '50% 50%' },
+        1.45
+      );
+
+      tl.fromTo(
+        liveLabel,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: 'power2.out' },
+        1.5
+      );
+
+      // sine-wave-loop (yoyo form): the dot's steady breathing — resting scale 1,
+      // finite repeats — begins where the entry settled (no jump) and is the ONLY
+      // motion carried into the Scene 3 hold.
+      tl.to(
+        dot,
+        { scale: 1.14, duration: 0.65, ease: 'sine.inOut', yoyo: true, repeat: 3, transformOrigin: '50% 50%' },
+        1.75
+      );
+
+      // Scene 3 (3.0–4.373s): the backdrop has settled into its darkest state and
+      // holds; the corner pulse (above) is the only motion carried through the hold.
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['04-benefit-247'] = tl;
+    })();
+  </script>
+</template>

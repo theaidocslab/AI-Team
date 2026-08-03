@@ -1,0 +1,242 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Raleway";
+      src: url("assets/fonts/raleway.woff2") format("woff2");
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    /* Root — style by #root only (subcomposition_root_styled_by_class). */
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Raleway", sans-serif;
+    }
+
+    /* Full-bleed ground lives on its own class="clip" layer, never on #root. */
+    .bg {
+      position: absolute;
+      inset: 0;
+      background-color: #0a0a0a;
+    }
+
+    .counter-stage {
+      position: absolute;
+      inset: 0;
+    }
+
+    .counter-wrap {
+      position: absolute;
+      left: 50%;
+      top: 620px;
+      width: 900px;
+      height: 560px;
+      margin-left: -450px;
+      margin-top: -280px;
+    }
+
+    .counter-full,
+    .counter-split {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .counter-full {
+      font-size: 42cqw;
+      font-weight: 700;
+      line-height: 1;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+      transform-origin: center center;
+    }
+
+    .counter-split {
+      opacity: 0;
+      align-items: baseline;
+    }
+
+    .digit-majority,
+    .digit-highlight {
+      display: inline-block;
+      font-size: 42cqw;
+      font-weight: 700;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .digit-majority {
+      color: #ffffff;
+    }
+
+    .digit-highlight-wrap {
+      position: relative;
+      display: inline-block;
+      line-height: 1;
+    }
+
+    .digit-highlight {
+      color: #ffffff;
+      transform-origin: center center;
+    }
+
+    .hairline-gold {
+      position: absolute;
+      left: 6%;
+      right: 6%;
+      bottom: -22px;
+      height: 4px;
+      background-color: #e8c97a;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="01-hook"
+    data-width="1080"
+    data-height="1920"
+  >
+    <div
+      class="bg clip"
+      data-start="0"
+      data-duration="3.2"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="counter-stage clip"
+      data-start="0"
+      data-duration="3.2"
+      data-track-index="1"
+    >
+      <div class="counter-wrap">
+        <!-- Scene 1: single counting numeral (0 -> 186), scale grows with the count. -->
+        <span class="counter-full" id="counter-full">0</span>
+
+        <!-- Scene 2/3: same digits, split into a dimmed majority + one gold-lit group. -->
+        <div class="counter-split" id="counter-split">
+          <span class="digit-majority" id="digit-majority">18</span>
+          <span class="digit-highlight-wrap" id="digit-highlight-wrap">
+            <span class="digit-highlight" id="digit-highlight">6</span>
+            <span class="hairline-gold" id="hairline-gold"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const TOTAL_DUR = 3.2;
+
+      /* ---- timing (Scene windows scaled 0.8x from the blueprint's 4.0s reference
+         onto this frame's real 3.2s duration, so proportional sync to the
+         voiceover cue "Did you know?" is preserved) ---- */
+      const TIMING = {
+        countStart: 0,
+        countDur: 1.05, // Scene 1 (0.0-1.28s): quick, clean count-up
+        swapAt: 1.28, // Scene 2 starts: hard swap, single numeral -> split digits
+        splitStart: 1.28,
+        gapDur: 0.6,
+        colorDur: 0.55,
+        hairlineAt: 1.75,
+        hairlineDur: 0.4,
+        scene3At: 2.24, // Scene 3: held read + barely-perceptible glow pulse
+      };
+      const TARGET_VALUE = 186;
+      const START_SCALE = 0.55;
+
+      const counterFull = document.getElementById("counter-full");
+      const digitMajority = document.getElementById("digit-majority");
+      const digitHighlightWrap = document.getElementById("digit-highlight-wrap");
+      const digitHighlight = document.getElementById("digit-highlight");
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["01-hook"] = tl;
+
+      /* ---- Scene 1: count-up 0 -> 186 with synchronized transform-scale growth ---- */
+      const countState = { value: 0 };
+      tl.to(
+        countState,
+        {
+          value: TARGET_VALUE,
+          duration: TIMING.countDur,
+          ease: "power3.out",
+          onUpdate: () => {
+            counterFull.textContent = Math.round(countState.value).toLocaleString();
+          },
+        },
+        TIMING.countStart,
+      );
+      tl.fromTo(
+        counterFull,
+        { scale: START_SCALE },
+        { scale: 1, duration: TIMING.countDur, ease: "power3.out" },
+        TIMING.countStart,
+      );
+
+      /* ---- Scene 1 -> 2 seam: hard swap at the exact matching frame (identical
+         digits "186", so the swap is imperceptible) ---- */
+      tl.set(counterFull, { opacity: 0 }, TIMING.swapAt);
+      tl.set("#counter-split", { opacity: 1 }, TIMING.swapAt);
+
+      /* ---- Scene 2: the numeral SPLITS — majority dims to gray, one digit-group
+         gold-lights, a thin gold hairline draws under it only ---- */
+      tl.to(
+        digitMajority,
+        { x: -16, duration: TIMING.gapDur, ease: "power2.out" },
+        TIMING.splitStart,
+      );
+      tl.to(
+        digitHighlightWrap,
+        { x: 16, duration: TIMING.gapDur, ease: "power2.out" },
+        TIMING.splitStart,
+      );
+      tl.to(
+        digitMajority,
+        { color: "#5A5A5A", duration: TIMING.colorDur, ease: "power2.out" },
+        TIMING.splitStart,
+      );
+      tl.to(
+        digitHighlight,
+        { color: "#E8C97A", duration: TIMING.colorDur, ease: "power2.out" },
+        TIMING.splitStart,
+      );
+      tl.fromTo(
+        "#hairline-gold",
+        { scaleX: 0 },
+        { scaleX: 1, duration: TIMING.hairlineDur, ease: "power2.out" },
+        TIMING.hairlineAt,
+      );
+
+      /* ---- Scene 3: held read — dimmed majority stays static; the gold-lit
+         fragment holds a barely-perceptible glow pulse (bounded, deterministic
+         idle breathe — never a yoyo loop) ---- */
+      const breathePhase = { p: 0 };
+      const breatheDur = TOTAL_DUR - TIMING.scene3At;
+      tl.to(
+        breathePhase,
+        {
+          p: Math.PI * 2 * 1.3,
+          duration: breatheDur,
+          ease: "none",
+          onUpdate: () => {
+            const s = Math.sin(breathePhase.p);
+            digitHighlight.style.textShadow =
+              "0 0 " + (16 + s * 6).toFixed(1) + "px rgba(232,201,122," + (0.32 + s * 0.1).toFixed(3) + ")";
+            gsap.set(digitHighlight, { scale: 1 + s * 0.012 });
+          },
+        },
+        TIMING.scene3At,
+      );
+    })();
+  </script>
+</template>

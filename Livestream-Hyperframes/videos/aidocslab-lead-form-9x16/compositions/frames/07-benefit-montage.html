@@ -1,0 +1,88 @@
+<template>
+  <style>
+    /* Root: styled via #root only — a class here would be scoped out at assembly. */
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+    }
+
+    /* Full-bleed ground lives on its own class="clip" layer, never on #root itself. */
+    .bm07-bg {
+      position: absolute;
+      inset: 0;
+      background: #0a0a0a; /* frame.md text-primary — reversed ground for this beat */
+    }
+
+    /* Each beat is its own clip: HyperFrames' own start/duration gating IS the hard cut —
+       no opacity/transform entrance is authored, matching "no fade/slide" in the packet. */
+    .bm07-phrase {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 83cqh; /* caption keep-out — never enters the bottom ~17% */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5cqw;
+    }
+
+    .bm07-phrase-text {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      color: #ffffff; /* frame.md bg-primary, reversed onto the dark ground */
+      text-align: center;
+      line-height: 1.04;
+      font-size: 8cqw; /* frame.md "display" scale */
+      max-width: 90cqw;
+    }
+
+    /* Payoff beat runs longer copy — fit-to-measure per frame.md, split to two balanced lines. */
+    .bm07-phrase--payoff .bm07-phrase-text {
+      font-size: 7.2cqw;
+      max-width: 84cqw;
+    }
+  </style>
+
+  <div id="root" data-composition-id="07-benefit-montage" data-width="1080" data-height="1920">
+    <div class="clip bm07-bg" data-start="0" data-duration="5.12" data-track-index="0"></div>
+
+    <div class="clip bm07-phrase" id="bm07-phrase-1" data-start="0" data-duration="1.4" data-track-index="1">
+      <p class="bm07-phrase-text">HIGHER CONVERSION</p>
+    </div>
+
+    <div class="clip bm07-phrase" id="bm07-phrase-2" data-start="1.4" data-duration="1.5" data-track-index="1">
+      <p class="bm07-phrase-text">ZERO MANUAL ENTRY</p>
+    </div>
+
+    <div
+      class="clip bm07-phrase bm07-phrase--payoff"
+      id="bm07-phrase-3"
+      data-start="2.9"
+      data-duration="2.22"
+      data-track-index="1"
+    >
+      <p class="bm07-phrase-text" id="bm07-phrase-3-text">CALLS THAT ARE<br />ALREADY QUALIFIED</p>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // The payoff phrase is the longest-held beat (2.9s → end of shot) — a quiet, barely-there
+    // settle as it lands (not a fade/slide entrance; the hard cut itself is the arrival).
+    tl.fromTo(
+      "#bm07-phrase-3-text",
+      { scale: 1.035 },
+      { scale: 1, duration: 0.22, ease: "power2.out" },
+      2.9
+    );
+
+    window.__timelines["07-benefit-montage"] = tl;
+  </script>
+</template>

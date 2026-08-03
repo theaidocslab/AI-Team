@@ -1,0 +1,258 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Raleway';
+      src: url('assets/fonts/raleway.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .c03-product-intro-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF; /* bg-primary — Scene 1 flat white ground, the contrast turn from Frame 2's black */
+    }
+
+    .c03-product-intro-camera {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 50%; /* Scene 3 camera push pivots here */
+      will-change: transform;
+    }
+
+    .c03-product-intro-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 83cqh; /* caption keep-out: nothing below y=0.83h */
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      padding: 0 7cqw; /* pad-x */
+      will-change: transform; /* Scene 3 recenter translate */
+    }
+
+    .c03-product-intro-tagline-col {
+      flex: 0 0 70%; /* Asymmetric 70/30 — left text / right clear space */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .c03-product-intro-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E8C97A; /* accent */
+      margin: 0 0 1.4cqw;
+    }
+
+    .c03-product-intro-headline {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 2.2cqw;
+      line-height: 1.5;
+      color: #0A0A0A; /* text-primary ink */
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .c03-product-intro-cursor {
+      color: #E8C97A; /* accent */
+      font-weight: 400;
+    }
+
+    .c03-product-intro-cursor-blink {
+      animation: c03-product-intro-blink 0.8s step-end infinite;
+    }
+
+    .c03-product-intro-cursor-solid {
+      animation: none;
+      opacity: 1;
+    }
+
+    @keyframes c03-product-intro-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .c03-product-intro-hero-col {
+      position: relative;
+      flex: 0 0 30%; /* mark pops in at the right 30% */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .c03-product-intro-ring {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 30cqw;
+      height: 30cqw;
+      margin: -15cqw 0 0 -15cqw; /* margin-based centering — no static transform, so GSAP scale is conflict-free */
+      border: 1px dashed #C9A84C; /* line */
+      border-radius: 50%;
+    }
+
+    .c03-product-intro-hero-wrap {
+      position: relative;
+      z-index: 1;
+      width: 11cqw;
+      height: 11cqw;
+    }
+
+    .c03-product-intro-hero-mark {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="03-product-intro"
+    data-width="1920"
+    data-height="1080"
+    data-duration="5.141"
+  >
+    <div
+      class="clip c03-product-intro-bg"
+      id="c03-bg"
+      data-start="0"
+      data-duration="5.141"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="clip c03-product-intro-camera"
+      id="c03-camera"
+      data-start="0"
+      data-duration="5.141"
+      data-track-index="1"
+    >
+      <div class="c03-product-intro-stage" id="c03-stage">
+        <!-- Scene 1 (0.0–1.2s): eyebrow + typed headline set context, left-aligned -->
+        <div class="c03-product-intro-tagline-col" id="c03-tagline-col">
+          <p class="c03-product-intro-label" id="c03-label">Introducing</p>
+          <p class="c03-product-intro-headline" id="c03-headline">
+            <span id="c03-typed"></span><span
+              class="c03-product-intro-cursor c03-product-intro-cursor-solid"
+              id="c03-cursor"
+              >|</span
+            >
+          </p>
+        </div>
+
+        <!-- Scene 2 (1.2–2.4s): mark pops in at the right 30%; Scene 3 (2.4–4.0s): ring drifts in behind it -->
+        <div class="c03-product-intro-hero-col" id="c03-hero-col">
+          <div class="c03-product-intro-ring" id="c03-ring"></div>
+          <div class="c03-product-intro-hero-wrap" id="c03-hero-wrap">
+            <img class="c03-product-intro-hero-mark" src="assets/logo-icon.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var STAGE_W = 1920;
+      var TOTAL_DURATION = 5.141;
+
+      var root = document.querySelector('[data-composition-id="03-product-intro"]');
+      var camera = root.querySelector('#c03-camera');
+      var stage = root.querySelector('#c03-stage');
+      var label = root.querySelector('#c03-label');
+      var typed = root.querySelector('#c03-typed');
+      var cursor = root.querySelector('#c03-cursor');
+      var taglineCol = root.querySelector('#c03-tagline-col');
+      var heroCol = root.querySelector('#c03-hero-col');
+      var heroWrap = root.querySelector('#c03-hero-wrap');
+      var ring = root.querySelector('#c03-ring');
+
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      /* ============================================================
+         Scene 1 (0.0–1.2s): eyebrow fades in; headline TYPES in via
+         discrete substring steps (deterministic under seek — no
+         TextPlugin / network dependency required).
+         ============================================================ */
+      tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0);
+
+      var TEXT = 'Meet the AI lead capture form';
+      var TYPE_START = 0.0;
+      var TYPE_DUR = 1.05;
+      var STEP = TYPE_DUR / TEXT.length;
+
+      for (var i = 1; i <= TEXT.length; i++) {
+        tl.set(typed, { textContent: TEXT.slice(0, i) }, TYPE_START + STEP * (i - 1));
+      }
+
+      // Cursor: solid while typing, blinks once typing settles (idle hold to 1.2s).
+      tl.call(
+        function () {
+          cursor.classList.remove('c03-product-intro-cursor-solid');
+          cursor.classList.add('c03-product-intro-cursor-blink');
+        },
+        [],
+        TYPE_START + TYPE_DUR
+      );
+
+      /* ============================================================
+         Scene 2 (1.2–2.4s): mark pops in at the right 30% — smooth
+         power3 settle, minimal overshoot (Cartesian's no-bounce rule).
+         ============================================================ */
+      tl.fromTo(
+        heroWrap,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.55, ease: 'power3.out' },
+        1.2
+      );
+
+      /* ============================================================
+         Scene 3 (2.4–4.0s): tagline exits, layout recenters on the
+         mark, a geo-ring drifts in behind it, camera pushes in to a
+         held close-up. Holds static from there to the transition out.
+         ============================================================ */
+      tl.to(
+        taglineCol,
+        { opacity: 0, y: -20, duration: 0.5, ease: 'power2.out' },
+        2.4
+      );
+
+      // Recenter: measure the mark's rest position, translate the stage so it lands
+      // on the frame's true horizontal center.
+      var heroColRect = heroCol.getBoundingClientRect();
+      var stageRect = stage.getBoundingClientRect();
+      var heroCenterX = heroColRect.left + heroColRect.width / 2 - stageRect.left;
+      var recenterDeltaX = STAGE_W / 2 - heroCenterX;
+
+      tl.to(stage, { x: recenterDeltaX, duration: 0.9, ease: 'power3.out' }, 2.5);
+
+      tl.fromTo(
+        ring,
+        { opacity: 0, scale: 0.85 },
+        { opacity: 0.2, scale: 1, duration: 1.0, ease: 'power2.out' },
+        2.7
+      );
+
+      tl.to(camera, { scale: 1.5, duration: 1.1, ease: 'power2.out' }, 2.8);
+
+      window.__timelines['03-product-intro'] = tl;
+    })();
+  </script>
+</template>
