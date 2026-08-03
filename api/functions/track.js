@@ -37,22 +37,30 @@ exports.handler = async (event) => {
 
   const path = typeof payload.path === 'string' ? payload.path.slice(0, 200) : '/';
   const referrer = typeof payload.referrer === 'string' ? payload.referrer.slice(0, 200) : '';
+  const FUNNEL_TYPES = ['chat_open', 'scroll_apply', 'form_submit'];
+  const type = FUNNEL_TYPES.includes(payload.type) ? payload.type : 'pageview';
 
   try {
     const store = getStore('analytics');
     const today = new Date().toISOString().slice(0, 10);
 
-    const total = parseInt((await store.get('total')) || '0', 10) + 1;
-    await store.set('total', String(total));
+    if (type === 'pageview') {
+      const total = parseInt((await store.get('total')) || '0', 10) + 1;
+      await store.set('total', String(total));
 
-    const dayKey = `day:${today}`;
-    const dayCount = parseInt((await store.get(dayKey)) || '0', 10) + 1;
-    await store.set(dayKey, String(dayCount));
+      const dayKey = `day:${today}`;
+      const dayCount = parseInt((await store.get(dayKey)) || '0', 10) + 1;
+      await store.set(dayKey, String(dayCount));
 
-    const eventsRaw = await store.get('events');
-    const events = eventsRaw ? JSON.parse(eventsRaw) : [];
-    events.unshift({ path, referrer, t: Date.now() });
-    await store.set('events', JSON.stringify(events.slice(0, 300)));
+      const eventsRaw = await store.get('events');
+      const events = eventsRaw ? JSON.parse(eventsRaw) : [];
+      events.unshift({ path, referrer, t: Date.now() });
+      await store.set('events', JSON.stringify(events.slice(0, 300)));
+    } else {
+      const funnelKey = `funnel:${type}`;
+      const funnelTotal = parseInt((await store.get(funnelKey)) || '0', 10) + 1;
+      await store.set(funnelKey, String(funnelTotal));
+    }
 
     return { statusCode: 204, headers, body: '' };
   } catch (err) {

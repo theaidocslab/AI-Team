@@ -627,6 +627,18 @@ footer a { color: var(--gold-light); text-decoration: none; }
   <a href="#apply" class="cta-btn" style="text-decoration:none;">See The Real Offer &darr;</a>
 </div>
 
+<div class="section" style="border-bottom:none; padding-bottom:24px;">
+  <h2 class="section-title">It's Already Getting <span>Found</span></h2>
+  <div class="offer-box" style="text-align:left;">
+    <p style="font-size:13px; color:rgba(255,255,255,0.75); line-height:1.85; margin-bottom:14px;">
+      Here's real, checkable proof the "AI crawler plugin" claim isn't just marketing copy: a live Gemini search for a 3PL/warehousing provider at the Freeport Center surfaced <strong style="color:var(--gold-light);">Oborn Transfer &amp; Storage</strong> — an actual client — and their site carries The AI Docs Lab's footer credit. See for yourself: <a href="https://oborn.com" target="_blank" rel="noopener" style="color:var(--gold-light);">oborn.com</a>.
+    </p>
+    <p style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.85; margin-bottom:0; font-style:italic;">
+      Honest caveat: that client is in logistics, not coaching — there isn't a coaching-niche example live yet. This proves the mechanism works; it doesn't yet prove it in your specific niche. The same AI crawler plugin gets built into every page, including yours.
+    </p>
+  </div>
+</div>
+
 <div id="apply">
 <div class="top-bar">⚡ Agencies Charge $5,000+ For This — Yours Is $297 One-Time · 48-Hour Delivery</div>
 
@@ -872,6 +884,32 @@ footer a { color: var(--gold-light); text-decoration: none; }
   } catch (e) {}
 })();
 
+const trackedFunnelEvents = new Set();
+function trackFunnelEvent(type) {
+  if (trackedFunnelEvents.has(type)) return;
+  trackedFunnelEvents.add(type);
+  try {
+    fetch('https://api.theaidocslab.com/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: location.pathname, referrer: document.referrer, type: type })
+    }).catch(function () {});
+  } catch (e) {}
+}
+
+const applySection = document.getElementById('apply');
+if (applySection && 'IntersectionObserver' in window) {
+  const applyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        trackFunnelEvent('scroll_apply');
+        applyObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.1 });
+  applyObserver.observe(applySection);
+}
+
 const responses = [
   {
     keywords: ['include', 'included', 'program', 'what do i get', 'reboot'],
@@ -916,6 +954,7 @@ function toggleChat() {
   const badge = document.querySelector('.chat-bubble-badge');
   panel.classList.toggle('open');
   if (badge) badge.style.display = 'none';
+  if (panel.classList.contains('open')) trackFunnelEvent('chat_open');
 }
 
 function appendMessage(text, sender) {
@@ -1003,6 +1042,7 @@ function submitForm() {
     alert('Please fill in all required fields marked with *');
     return;
   }
+  trackFunnelEvent('form_submit');
   const formData = new FormData();
   formData.append('form-name', 'coach-application');
   formData.append('first-name', document.getElementById('fname').value);

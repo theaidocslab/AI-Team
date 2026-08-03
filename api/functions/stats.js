@@ -13,6 +13,11 @@ exports.handler = async () => {
     const eventsRaw = await store.get('events');
     const events = eventsRaw ? JSON.parse(eventsRaw) : [];
 
+    const chatOpen = parseInt((await store.get('funnel:chat_open')) || '0', 10);
+    const scrollApply = parseInt((await store.get('funnel:scroll_apply')) || '0', 10);
+    const formSubmit = parseInt((await store.get('funnel:form_submit')) || '0', 10);
+    const pct = (n) => (total > 0 ? ((n / total) * 100).toFixed(1) : '0.0');
+
     const now = Date.now();
     const oneDay = 24 * 60 * 60 * 1000;
     const last7 = [];
@@ -52,10 +57,10 @@ h1{color:#D4AF37;font-size:20px;margin:0 0 24px;}
 .section{margin-bottom:32px;max-width:600px;}
 .section h2{font-size:13px;color:#D4AF37;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #2a2a2a;padding-bottom:8px;}
 .bar-row{display:flex;align-items:center;gap:12px;margin:6px 0;font-size:13px;}
-.bar-label{width:50px;color:#999;}
+.bar-label{width:120px;color:#999;flex-shrink:0;}
 .bar-track{flex:1;background:#1a1a1a;border-radius:4px;overflow:hidden;height:16px;}
 .bar-fill{background:#D4AF37;height:100%;}
-.bar-count{width:30px;text-align:right;color:#ccc;}
+.bar-count{width:90px;text-align:right;color:#ccc;flex-shrink:0;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 td,th{padding:6px 8px;border-bottom:1px solid #2a2a2a;text-align:left;color:#ccc;}
 th{color:#999;text-transform:uppercase;font-size:11px;}
@@ -71,6 +76,13 @@ th{color:#999;text-transform:uppercase;font-size:11px;}
 <div class="section">
 <h2>Visitors — Last 7 Days</h2>
 ${last7.map((d) => `<div class="bar-row"><div class="bar-label">${d.date}</div><div class="bar-track"><div class="bar-fill" style="width:${((d.count / maxDay) * 100).toFixed(0)}%"></div></div><div class="bar-count">${d.count}</div></div>`).join('')}
+</div>
+<div class="section">
+<h2>Conversion Funnel</h2>
+<div class="bar-row"><div class="bar-label">Pageviews</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-count">${total} (100%)</div></div>
+<div class="bar-row"><div class="bar-label">Opened Chat</div><div class="bar-track"><div class="bar-fill" style="width:${pct(chatOpen)}%"></div></div><div class="bar-count">${chatOpen} (${pct(chatOpen)}%)</div></div>
+<div class="bar-row"><div class="bar-label">Reached Apply</div><div class="bar-track"><div class="bar-fill" style="width:${pct(scrollApply)}%"></div></div><div class="bar-count">${scrollApply} (${pct(scrollApply)}%)</div></div>
+<div class="bar-row"><div class="bar-label">Submitted App</div><div class="bar-track"><div class="bar-fill" style="width:${pct(formSubmit)}%"></div></div><div class="bar-count">${formSubmit} (${pct(formSubmit)}%)</div></div>
 </div>
 <div class="section">
 <h2>Top Pages</h2>
