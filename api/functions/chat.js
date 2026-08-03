@@ -4,6 +4,8 @@
 
 const ALLOWED_ORIGINS = [
   'https://coach-landing-page-application.netlify.app',
+  'https://theaidocslabdemolandingpage.netlify.app',
+  'https://demo.theaidocslab.com',
   'https://theaidocslab.com',
   'https://www.theaidocslab.com',
   'http://localhost:8888', // netlify dev
