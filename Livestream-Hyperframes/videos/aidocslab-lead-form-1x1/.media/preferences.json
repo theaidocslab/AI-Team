@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "linkedin",
+      "confirmed_in": [
+        "aidocslab-lead-form-1x1"
+      ],
+      "updated_at": "2026-08-03T04:17:07.088Z"
+    },
+    "aspect": {
+      "value": "1080x1080",
+      "confirmed_in": [
+        "aidocslab-lead-form-1x1"
+      ],
+      "updated_at": "2026-08-03T04:17:07.141Z"
+    },
+    "language": {
+      "value": "en",
+      "confirmed_in": [
+        "aidocslab-lead-form-1x1"
+      ],
+      "updated_at": "2026-08-03T04:17:07.189Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "aidocslab-lead-form-1x1"
+      ],
+      "updated_at": "2026-08-03T04:17:07.235Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "aidocslab-lead-form-1x1"
+      ],
+      "updated_at": "2026-08-03T04:17:07.286Z"
+    }
+  },
+  "sightings": {}
+}

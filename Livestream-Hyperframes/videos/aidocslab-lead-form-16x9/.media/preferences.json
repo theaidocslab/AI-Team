@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "youtube",
+      "confirmed_in": [
+        "aidocslab-lead-form-16x9"
+      ],
+      "updated_at": "2026-08-03T04:16:59.645Z"
+    },
+    "aspect": {
+      "value": "1920x1080",
+      "confirmed_in": [
+        "aidocslab-lead-form-16x9"
+      ],
+      "updated_at": "2026-08-03T04:16:59.691Z"
+    },
+    "language": {
+      "value": "en",
+      "confirmed_in": [
+        "aidocslab-lead-form-16x9"
+      ],
+      "updated_at": "2026-08-03T04:16:59.745Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "aidocslab-lead-form-16x9"
+      ],
+      "updated_at": "2026-08-03T04:16:59.794Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "aidocslab-lead-form-16x9"
+      ],
+      "updated_at": "2026-08-03T04:16:59.838Z"
+    }
+  },
+  "sightings": {}
+}
