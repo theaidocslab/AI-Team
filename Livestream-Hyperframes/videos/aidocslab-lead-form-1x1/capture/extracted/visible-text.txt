@@ -63,3 +63,43 @@ but not hype-y. Founder-led ("Dr. Eric reviews every application personally").
 
 AUDIENCE: Coaches, consultants, and service professionals who currently have
 no landing page, or one that "generates zero leads."
+
+---
+UPDATE (current pricing, supersedes the $297/"$5,000 agency value" framing
+above — that copy is from an older version of the demo page):
+
+Three current tiers:
+
+1. SIMPLE TOOL — $297 ("Quick Win")
+   Single-function browser-based AI tool. Client supplies own API key. Full
+   ownership, no monthly fees ever. Delivered in 24 hours.
+
+2. COACHING LANDING PAGE — $497 ("Most Popular — Coaches & Consultants", "New
+   Service") — THIS IS THE RELEVANT TIER for this video (it's the one that
+   includes the lead capture form):
+   - Custom AI-powered landing page
+   - Conversion copy written for your niche
+   - 24/7 AI chatbot trained on YOUR business
+   - Lead capture form built into your daily site
+   - Discovery call booking integration
+   - Built with your images and brand colors
+   - Full ownership — no monthly fees ever
+   - Delivered in 48 hours
+
+3. MEDIUM TOOL — $497 ("Full System")
+   Multi-feature AI tool or full landing page system. Groq + Anthropic
+   dual-provider support. Custom lead capture and automation. Full setup
+   guide. Browser-based, client owns everything. Delivered in 48 hours.
+
+There is also a broader "Sovereign Investment" founding-member package at
+$497 (one-time, no subscriptions) covering a custom AI landing page build,
+24/7 "Sovereign" AI chatbot, AEO & GEO search optimization, full source code
+ownership, and free custom domain + Lab hosting (or a $10/mo "Easy Button"
+hosting option, first 30 days free) — positioned as a limited founding-member
+offer ("only 3 spots available at this price point; price increases to $997
+soon").
+
+For THIS video (selling the lead capture form specifically), use the
+COACHING LANDING PAGE tier's framing and its $497 price point — not the old
+$297 figure, and not the broader Sovereign/founding-member pitch (that's a
+different offer, not the one built around the lead capture form).

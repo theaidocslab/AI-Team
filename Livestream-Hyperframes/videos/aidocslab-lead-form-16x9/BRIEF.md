@@ -14,7 +14,7 @@ audience: coaches, consultants, and service professionals
 ## Intent
 
 A faceless, benefit-focused promo for the AI lead capture form included in The AI
-Docs Lab's $297 AI-powered landing page package (demo.theaidocslab.com). Sell the
+Docs Lab's $497 Coaching Landing Page package (demo.theaidocslab.com). Sell the
 form's benefits, don't tour the whole site: 24/7 capture, automatic lead
 qualification, faster follow-up, higher conversion, booking/CRM integration, and
 less manual data entry. Confident, modern SaaS tone — not a hard sell.

@@ -121,8 +121,8 @@ keyMessage: The compounding payoff: better leads, less admin, more booked calls.
 
 ## Frame 8 — Get yours
 
-- scene: The gold mark locks into a closing lockup; the $297 offer and URL resolve beneath it.
-- voiceover: "Your AI lead capture form — part of the $297 AI Docs Lab page. Live in 48 hours."
+- scene: The gold mark locks into a closing lockup; the $497 offer and URL resolve beneath it.
+- voiceover: "Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours."
 - duration: 4.5s
 - transition_in: zoom-through
 - status: outline

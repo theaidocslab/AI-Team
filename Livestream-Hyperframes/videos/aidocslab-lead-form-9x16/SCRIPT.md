@@ -60,4 +60,4 @@
 **Time:** 30.5 – 35.0s
 **Delivery:** Warm, closing, a little urgent.
 
-    Your AI lead capture form — part of the $297 AI Docs Lab page. Live in 48 hours.
+    Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours.
