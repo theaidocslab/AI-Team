@@ -287,7 +287,7 @@
     var cursor = document.getElementById("cursor");
     var ripple = document.getElementById("ripple");
 
-    tl.fromTo(cursor, { x: 2000, y: 90 }, { x: 2000, y: 90, duration: 0.01 }, 0);
+    tl.set(cursor, { x: 2000, y: 90 }, 0);
 
     function moveCursor(x, y, at, dur) {
       tl.to(cursor, { x: x, y: y, duration: dur, ease: "power3.out" }, at);
@@ -297,19 +297,10 @@
       tl.set(ripple, { x: x, y: y, scale: 0, opacity: 1 }, at);
       tl.to(ripple, { scale: 4, opacity: 0, duration: 0.6, ease: "power2.out" }, at);
     }
-    function pulseField(id, at) {
-      tl.fromTo(
-        "#" + id,
-        { backgroundColor: "rgba(255,255,255,0.55)" },
-        { backgroundColor: "rgba(232,201,122,0.22)", duration: 0.15, yoyo: true, repeat: 1 },
-        at
-      );
-    }
 
     // ---------- Scene 1 (0.0-1.1s): cursor enters, clicks into "niche" field ----------
     moveCursor(620, 225, 0.05, 0.55);
     clickAt(620, 225, 0.62);
-    pulseField("f1-parent-placeholder", 0.62); // no-op guard, field pulses handled below directly
 
     tl.fromTo(
       document.querySelectorAll(".form-card .field")[0].querySelector(".field-value"),
