@@ -1,8 +1,8 @@
 # SCRIPT — aidocslab-lead-form-9x16
 
-**Voice:** Kokoro (local, offline) — am_michael or a warm, confident male/female voice matching the brand's founder-led tone; final voice selection at Step 3.1.
-**Voice settings:** —
-**Voice direction:** Confident, plainspoken, a little urgent — not hype-y. Founder-led, like someone who reviews every application personally.
+**Voice:** Kokoro (local, offline) — `am_michael` (American male). Note: Kokoro tags voices only by gender + accent, not race/ethnicity; there is no way to guarantee a specific racial voice identity with this engine.
+**Voice settings:** speed 1.0
+**Voice direction:** Calm, clear, confident delivery — plainspoken, a little urgent but not hype-y. Founder-led, like someone who reviews every application personally.
 
 ---
 

@@ -4,7 +4,7 @@ duration: 35s
 message: "Never miss a lead again — your AI lead capture form works 24/7, auto-qualifies, and books faster."
 arc: Feature-Benefit Cascade — Hook → Pain → Product Intro → Benefit ×4 → CTA
 audience: coaches, consultants, and service professionals
-music: confident minimal tech underscore
+music: upbeat, attention-grabbing modern electronic underscore, driving but not overpowering the voiceover
 mode: collaborative
 ---
 
