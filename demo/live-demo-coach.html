@@ -482,9 +482,30 @@ function closeChat() {
     document.querySelector('.chat-banner').style.display = 'block';
 }
 
-// System prompt and full pricing detail now live server-side in
-// api/functions/aidl-chat.js - never sent to or readable by the browser.
-const CHAT_API_URL = 'https://api.theaidocslab.com/aidl-chat';
+const CHAT_API_URL = 'https://api.theaidocslab.com/aidl-chat.php';
+
+const AIDL_SYSTEM_PROMPT = `You are the AI assistant for The AI Docs Lab™, on a demo landing page showing coaches, attorneys, and contractors what their AI-powered site could look like.
+
+Answer questions directly and helpfully using this knowledge:
+
+SERVICES & PRICING (all one-time, no subscriptions):
+- Quick Win (Simple Tool): $297 — single-function browser-based AI tool, delivered in 24 hours
+- Coaching Landing Page: $497 — custom AI landing page, conversion copy, 24/7 trained chatbot, lead capture, delivered in 48 hours
+- Full System (Medium Tool): $497 — multi-feature AI tool or funnel system, delivered in 48 hours
+- Enterprise Grade: starting at $997 — full WordPress site + chatbot + lead capture + SEO, delivered in 72 hours
+- Full website builds range $497–$2,997 depending on scope (Starter/Signature/Premium tiers)
+- AI Chatbot Retainer: $49–97/month — the one recurring offer, since ongoing chatbot management requires active upkeep
+
+PHILOSOPHY — The Sovereign Standard™:
+- Buy once, own it forever. No subscriptions, no monthly platform fees, no vendor lock-in.
+- Everything is browser-based with zero cloud dependency where possible.
+- Founded by Dr. Eric Townsend, PhD — 20+ years of operational leadership before building AI systems. He builds every system personally.
+
+PROCESS: Free 30-minute discovery call → Build → Delivered fully documented, ready to run, fully owned by the client.
+
+TONE: Confident, direct, no jargon, no fake urgency or fake scarcity. If someone asks something genuinely custom (specific technical architecture for their exact business, contract terms, or anything requiring Dr. Eric's personal judgment), tell them honestly and offer to book a Strategy Call — but only for those cases, not as a default deflection. Keep answers to 2-3 sentences.`;
+
+let aidlChatHistory = [];
 
 async function handleChat() {
     const input = document.getElementById('chatInput');
@@ -500,6 +521,8 @@ async function handleChat() {
     input.value = '';
     messages.scrollTop = messages.scrollHeight;
 
+    aidlChatHistory.push({ role: 'user', content: text });
+
     const typingMsg = document.createElement('div');
     typingMsg.id = 'aidl-typing';
     typingMsg.style = "background: var(--black-3); padding: 15px; border-radius: 12px; border: 1px solid var(--border); align-self: flex-start; max-width: 85%; font-size: 14px; line-height: 1.6; opacity: 0.6;";
@@ -511,7 +534,12 @@ async function handleChat() {
         const res = await fetch(CHAT_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text }),
+            body: JSON.stringify({
+                messages: [
+                    { role: 'system', content: AIDL_SYSTEM_PROMPT },
+                    ...aidlChatHistory
+                ]
+            }),
             signal: AbortSignal.timeout(8000),
         });
 
@@ -519,10 +547,11 @@ async function handleChat() {
         document.getElementById('aidl-typing')?.remove();
 
         if (!res.ok || data.error) {
-            throw new Error(data.error || 'Chat request failed');
+            throw new Error(data.error?.message || data.error || 'Chat request failed');
         }
 
-        const reply = data.reply || "Sorry, I didn't catch that — could you rephrase?";
+        const reply = data.choices?.[0]?.message?.content || "Sorry, I didn't catch that — could you rephrase?";
+        aidlChatHistory.push({ role: 'assistant', content: reply });
 
         const botMsg = document.createElement('div');
         botMsg.style = "background: var(--black-3); padding: 15px; border-radius: 12px; border: 1px solid var(--border); align-self: flex-start; max-width: 85%; font-size: 14px; line-height: 1.6;";
