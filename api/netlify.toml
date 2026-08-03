@@ -7,6 +7,11 @@
   status = 200
 
 [[redirects]]
+  from = "/aidl-chat"
+  to = "/.netlify/functions/aidl-chat"
+  status = 200
+
+[[redirects]]
   from = "/track"
   to = "/.netlify/functions/track"
   status = 200
