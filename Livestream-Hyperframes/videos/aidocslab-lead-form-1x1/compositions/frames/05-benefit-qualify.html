@@ -524,12 +524,28 @@
       rippleAt(OPTION4, 5.08, 2.6, 0.24);
 
       tl.to(dropdown, { scaleY: 0, opacity: 0, duration: 0.2, ease: 'power2.in' }, 5.16);
-      tl.call(
-        function () {
-          selectValue.textContent = 'My page exists but generates zero leads';
-          selectValue.classList.add('qf05-filled');
+
+      // Discrete text/class swap driven by a proxy + onUpdate (never a
+      // one-shot call()) — GSAP recomputes this tween's value from scratch
+      // on every seek, so the swap lands correctly at any seek time in
+      // either direction, matching the discrete-text-sequence pattern.
+      var selectSwap = { v: 0 };
+      tl.fromTo(
+        selectSwap,
+        { v: 0 },
+        {
+          v: 1,
+          duration: 0.001,
+          onUpdate: function () {
+            if (selectSwap.v >= 1) {
+              selectValue.textContent = 'My page exists but generates zero leads';
+              selectValue.classList.add('qf05-filled');
+            } else {
+              selectValue.textContent = 'Select an option';
+              selectValue.classList.remove('qf05-filled');
+            }
+          },
         },
-        [],
         5.16
       );
       tl.to(selectBox, { backgroundColor: 'rgba(232,201,122,0.22)', duration: 0.18, yoyo: true, repeat: 1 }, 5.16);
