@@ -1,0 +1,263 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Raleway';
+      src: url('assets/fonts/raleway.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Raleway', sans-serif;
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #EEE3C5;
+      --text-primary: #0A0A0A;
+      --text-secondary: #5A5A5A;
+      --accent: #E8C97A;
+      --line: #C9A84C;
+      --white-overlay: rgba(255, 255, 255, 0.3);
+    }
+
+    .clip {
+      position: absolute;
+    }
+
+    .f06-benefit-booking-bg {
+      inset: 0;
+      background: var(--bg-primary);
+    }
+
+    /* compass-drafted ring — quiet atmosphere, static */
+    .f06-benefit-booking-ring {
+      left: 50%;
+      top: 41.5cqh;
+      width: 46cqmin;
+      height: 46cqmin;
+      margin-left: -23cqmin;
+      margin-top: -23cqmin;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      opacity: 0.18;
+    }
+    .f06-benefit-booking-ring::before {
+      content: '';
+      position: absolute;
+      inset: 13%;
+      border: 1px dashed var(--line);
+      border-radius: 50%;
+    }
+
+    /* shared anchor stage — top 83% only, both surfaces center inside it */
+    .f06-benefit-booking-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 83cqh;
+    }
+
+    /* Scene 1 — the booking-link field */
+    .f06-benefit-booking-field {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 44cqw;
+      height: 14cqh;
+      padding: 2.6cqw 3cqw;
+      box-sizing: border-box;
+      background: var(--white-overlay);
+      border: 0.07cqw solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.3cqh;
+    }
+    .f06-benefit-booking-field-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .f06-benefit-booking-field-value {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.7cqw;
+      line-height: 1.4;
+      color: var(--text-primary);
+    }
+    .f06-benefit-booking-field-underline {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* Scene 2 — the calendar surface, same anchor */
+    .f06-benefit-booking-calendar {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 56cqw;
+      height: 36cqh;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+    }
+    .f06-benefit-booking-cal-header {
+      display: flex;
+      height: 6cqh;
+      border-bottom: 0.07cqw solid var(--line);
+    }
+    .f06-benefit-booking-cal-day {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .f06-benefit-booking-cal-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      border-top: 0.07cqw solid var(--line);
+      border-left: 0.07cqw solid var(--line);
+    }
+    .f06-benefit-booking-cell {
+      position: relative;
+      border-right: 0.07cqw solid var(--line);
+      border-bottom: 0.07cqw solid var(--line);
+    }
+    .f06-benefit-booking-cell-fill {
+      position: absolute;
+      inset: 0.4cqw;
+      background: var(--accent);
+      opacity: 0;
+    }
+
+    /* the frame's single ink accent */
+    .f06-benefit-booking-ink {
+      position: absolute;
+      top: 61.5cqh;
+      left: 50%;
+      width: 18cqw;
+      height: 1px;
+      margin-left: -9cqw;
+      background: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+  </style>
+
+  <div id="root" data-composition-id="06-benefit-booking" data-width="1080" data-height="1080">
+    <div class="clip f06-benefit-booking-bg" data-start="0" data-duration="3.2" data-track-index="0"></div>
+    <div class="clip f06-benefit-booking-ring" data-start="0" data-duration="3.2" data-track-index="1"></div>
+
+    <div class="f06-benefit-booking-stage">
+      <div class="clip f06-benefit-booking-field" data-start="0" data-duration="3.2" data-track-index="2">
+        <div class="f06-benefit-booking-field-label">Your booking link</div>
+        <div class="f06-benefit-booking-field-value">calendly.com/yourname</div>
+        <div class="f06-benefit-booking-field-underline"></div>
+      </div>
+
+      <div class="clip f06-benefit-booking-calendar" data-start="0" data-duration="3.2" data-track-index="3">
+        <div class="f06-benefit-booking-cal-header">
+          <div class="f06-benefit-booking-cal-day">M</div>
+          <div class="f06-benefit-booking-cal-day">T</div>
+          <div class="f06-benefit-booking-cal-day">W</div>
+          <div class="f06-benefit-booking-cal-day">T</div>
+          <div class="f06-benefit-booking-cal-day">F</div>
+        </div>
+        <div class="f06-benefit-booking-cal-grid">
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell f06-benefit-booking-cell--slot">
+            <div class="f06-benefit-booking-cell-fill"></div>
+          </div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+          <div class="f06-benefit-booking-cell"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clip f06-benefit-booking-ink" data-start="0" data-duration="3.2" data-track-index="4"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="06-benefit-booking"]');
+      var field = root.querySelector('.f06-benefit-booking-field');
+      var calendar = root.querySelector('.f06-benefit-booking-calendar');
+      var slotFill = root.querySelector('.f06-benefit-booking-cell-fill');
+      var ink = root.querySelector('.f06-benefit-booking-ink');
+
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0.0-1.15s): field settles in, calm hold, hero visible well before 0.5s.
+      tl.fromTo(
+        field,
+        { opacity: 0, y: 16, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'power2.out' },
+        0
+      );
+
+      // Scene 2 (~1.15-1.95s): weight-transfer — field slides aside + scales down + fades
+      // while the calendar surface grows into the exact same anchor, one event.
+      tl.fromTo(
+        field,
+        { x: 0, scale: 1, opacity: 1 },
+        { x: -340, scale: 0.55, opacity: 0, duration: 0.5, ease: 'power3.out' },
+        1.15
+      );
+      tl.fromTo(
+        calendar,
+        { opacity: 0, scale: 0.85 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' },
+        1.2
+      );
+
+      // the slot snaps to its filled accent state as the calendar settles in.
+      tl.fromTo(
+        slotFill,
+        { opacity: 0, scale: 0.4 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2.2)' },
+        1.65
+      );
+
+      // Scene 3 (2.4-2.8s): the single ink accent draws once beneath the filled slot, and stays.
+      tl.fromTo(
+        ink,
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.4, ease: 'power2.out' },
+        2.4
+      );
+
+      window.__timelines['06-benefit-booking'] = tl;
+    })();
+  </script>
+</template>

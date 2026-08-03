@@ -371,7 +371,8 @@
 
     // ---------- Scene 4 (3.4-5.909s): dropdown opens, selects, closes; camera settles + holds ----------
     var panel = document.getElementById("dropdown-panel");
-    tl.fromTo(panel, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.01 }, 0);
+    var opt3 = document.getElementById("opt3");
+    tl.set(panel, { scale: 0, opacity: 0 }, 0);
 
     moveCursor(620, 540, 3.9, 0.3);
     clickAt(620, 540, 4.22);
@@ -384,20 +385,28 @@
 
     moveCursor(620, 710, 4.7, 0.35);
     clickAt(620, 710, 5.07);
-    tl.to("#opt3", { backgroundColor: "rgba(232,201,122,0.28)", color: "#0A0A0A", duration: 0.15 }, 5.07);
-    tl.to(
-      f4El,
-      {
-        duration: 0.01,
-        onComplete: function () {
-          f4El.textContent = SELECTED;
-        },
-      },
-      5.15
-    );
     tl.to(panel, { scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" }, 5.15);
 
     moveCursor(700, 540, 5.45, 0.25);
+
+    // discrete state swaps (selection highlight + trigger text) — reverse-searched from a
+    // single linear driver so every seek, forward or backward, renders the correct state.
+    var driver = { t: 0 };
+    tl.to(
+      driver,
+      {
+        t: TOTAL,
+        duration: TOTAL,
+        ease: "none",
+        onUpdate: function () {
+          var chosen = driver.t >= 5.07;
+          opt3.style.backgroundColor = chosen ? "rgba(232,201,122,0.28)" : "rgba(255,255,255,0)";
+          opt3.style.color = chosen ? "#0A0A0A" : "#5A5A5A";
+          f4El.textContent = driver.t >= 5.15 ? SELECTED : "";
+        },
+      },
+      0
+    );
 
     window.__timelines["05-benefit-qualify"] = tl;
   </script>
