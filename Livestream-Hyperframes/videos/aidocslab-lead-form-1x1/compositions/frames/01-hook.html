@@ -20,13 +20,13 @@
       will-change: opacity;
     }
 
-    .01-hook-bg {
+    .f01-hook-bg {
       position: absolute;
       inset: 0;
       background: #0A0A0A; /* text-primary used as the flat, bare ground */
     }
 
-    .01-hook-stage {
+    .f01-hook-stage {
       position: absolute;
       left: 50%;
       top: 36cqh;
@@ -37,7 +37,7 @@
       gap: 2.2cqw;
     }
 
-    .01-hook-counter-wrap {
+    .f01-hook-counter-wrap {
       position: relative;
       width: 54cqw;
       height: 24cqw;
@@ -46,8 +46,8 @@
       justify-content: center;
     }
 
-    .01-hook-counter-live,
-    .01-hook-counter-split {
+    .f01-hook-counter-live,
+    .f01-hook-counter-split {
       font-family: 'Raleway', sans-serif;
       font-weight: 700;
       font-variant-numeric: tabular-nums;
@@ -57,11 +57,11 @@
       transform-origin: center center;
     }
 
-    .01-hook-counter-live {
+    .f01-hook-counter-live {
       display: inline-block;
     }
 
-    .01-hook-counter-split {
+    .f01-hook-counter-split {
       position: absolute;
       inset: 0;
       display: flex;
@@ -70,22 +70,22 @@
       opacity: 0; /* revealed at the crossfade, per recipe convention */
     }
 
-    .01-hook-digit-dim {
+    .f01-hook-digit-dim {
       display: inline-block;
     }
 
-    .01-hook-digit-lit-wrap {
+    .f01-hook-digit-lit-wrap {
       position: relative;
       display: inline-block;
     }
 
-    .01-hook-digit-lit {
+    .f01-hook-digit-lit {
       display: inline-block;
       text-shadow: 0 0 0px rgba(232, 201, 122, 0);
       transform-origin: center center;
     }
 
-    .01-hook-hairline {
+    .f01-hook-hairline {
       position: absolute;
       left: 0;
       right: 0;
@@ -96,7 +96,7 @@
       transform-origin: left center;
     }
 
-    .01-hook-label {
+    .f01-hook-label {
       font-family: 'Raleway', sans-serif;
       font-weight: 500;
       font-size: 14px;
@@ -109,25 +109,25 @@
 
   <div id="root" data-composition-id="01-hook" data-width="1080" data-height="1080" data-duration="3.2">
     <div
-      class="01-hook-bg clip"
+      class="f01-hook-bg clip"
       data-start="0"
       data-duration="3.2"
       data-track-index="0"
     ></div>
 
     <div
-      class="01-hook-stage clip"
+      class="f01-hook-stage clip"
       data-start="0"
       data-duration="3.2"
       data-track-index="1"
     >
-      <div class="01-hook-counter-wrap">
-        <span class="01-hook-counter-live" id="01-hook-counter">0</span>
-        <span class="01-hook-counter-split">
-          <span class="01-hook-digit-dim" id="01-hook-digit-dim">12</span><span class="01-hook-digit-lit-wrap"><span class="01-hook-digit-lit" id="01-hook-digit-lit">8</span><span class="01-hook-hairline" id="01-hook-hairline"></span></span>
+      <div class="f01-hook-counter-wrap">
+        <span class="f01-hook-counter-live" id="f01-hook-counter">0</span>
+        <span class="f01-hook-counter-split">
+          <span class="f01-hook-digit-dim" id="f01-hook-digit-dim">12</span><span class="f01-hook-digit-lit-wrap"><span class="f01-hook-digit-lit" id="f01-hook-digit-lit">8</span><span class="f01-hook-hairline" id="f01-hook-hairline"></span></span>
         </span>
       </div>
-      <div class="01-hook-label" id="01-hook-label">Site Visitors</div>
+      <div class="f01-hook-label" id="f01-hook-label">Site Visitors</div>
     </div>
   </div>
 
@@ -135,12 +135,12 @@
     window.__timelines = window.__timelines || {};
     const tl = gsap.timeline({ paused: true });
 
-    const counterLive = document.getElementById('01-hook-counter');
-    const counterSplit = document.querySelector('.01-hook-counter-split');
-    const digitDim = document.getElementById('01-hook-digit-dim');
-    const digitLit = document.getElementById('01-hook-digit-lit');
-    const hairline = document.getElementById('01-hook-hairline');
-    const label = document.getElementById('01-hook-label');
+    const counterLive = document.getElementById('f01-hook-counter');
+    const counterSplit = document.querySelector('.f01-hook-counter-split');
+    const digitDim = document.getElementById('f01-hook-digit-dim');
+    const digitLit = document.getElementById('f01-hook-digit-lit');
+    const hairline = document.getElementById('f01-hook-hairline');
+    const label = document.getElementById('f01-hook-label');
 
     // Scene 1 (0.0–1.28s) — counting-dynamic-scale: proxy value counts 0 → 128
     // (power3.out, quick and clean) while the counter's transform scale grows to

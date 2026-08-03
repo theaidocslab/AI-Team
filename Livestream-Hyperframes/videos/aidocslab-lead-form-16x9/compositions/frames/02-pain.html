@@ -20,13 +20,13 @@
       will-change: opacity;
     }
 
-    .02-pain-bg {
+    .p02-pain-bg {
       position: absolute;
       inset: 0;
       background: #0A0A0A; /* text-primary used as the flat ground — Scene 1 */
     }
 
-    .02-pain-card {
+    .p02-pain-card {
       position: absolute;
       left: calc(50% - 15cqw);
       top: 34cqh;
@@ -41,7 +41,7 @@
       gap: 2cqw;
     }
 
-    .02-pain-field {
+    .p02-pain-field {
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
       font-size: 1cqw;
@@ -50,7 +50,7 @@
       color: rgba(255, 255, 255, 0.85);
     }
 
-    .02-pain-label {
+    .p02-pain-label {
       position: absolute;
       left: calc(50% - 15cqw);
       top: 58cqh;
@@ -65,7 +65,7 @@
 
   <div id="root" data-composition-id="02-pain" data-width="1920" data-height="1080" data-duration="7.488">
     <div
-      id="02-pain-bg"
+      id="p02-pain-bg"
       class="clip"
       data-start="0"
       data-duration="7.488"
@@ -73,18 +73,18 @@
     ></div>
 
     <div
-      id="02-pain-card"
+      id="p02-pain-card"
       class="clip"
       data-start="0"
       data-duration="7.488"
       data-track-index="1"
     >
-      <div class="02-pain-field">Name</div>
-      <div class="02-pain-field">Email</div>
+      <div class="p02-pain-field">Name</div>
+      <div class="p02-pain-field">Email</div>
     </div>
 
     <div
-      id="02-pain-label"
+      id="p02-pain-label"
       class="clip"
       data-start="1.4"
       data-duration="1.2"
@@ -96,8 +96,8 @@
     window.__timelines = window.__timelines || {};
     const tl = gsap.timeline({ paused: true });
 
-    const card = document.getElementById('02-pain-card');
-    const label = document.getElementById('02-pain-label');
+    const card = document.getElementById('p02-pain-card');
+    const label = document.getElementById('p02-pain-label');
 
     // Scene 1 (0.0–1.4s) — bare two-field card fades in dead-center on the flat ground.
     tl.fromTo(

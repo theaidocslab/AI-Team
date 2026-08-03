@@ -20,13 +20,13 @@
       box-sizing: border-box;
     }
 
-    #02-pain-bg-field {
+    #p02-pain-bg-field {
       position: absolute;
       inset: 0;
       background: #0A0A0A;
     }
 
-    #02-pain-v-guide {
+    #p02-pain-v-guide {
       position: absolute;
       left: 8cqw;
       top: 0;
@@ -36,7 +36,7 @@
       opacity: 0;
     }
 
-    #02-pain-ring-big {
+    #p02-pain-ring-big {
       position: absolute;
       left: 50%;
       top: 40cqh;
@@ -49,7 +49,7 @@
       opacity: 0;
     }
 
-    #02-pain-ring-big::before {
+    #p02-pain-ring-big::before {
       content: '';
       position: absolute;
       inset: 14%;
@@ -57,7 +57,7 @@
       border-radius: 50%;
     }
 
-    #02-pain-ring-small {
+    #p02-pain-ring-small {
       position: absolute;
       left: 50%;
       top: 68cqh;
@@ -70,7 +70,7 @@
       opacity: 0;
     }
 
-    #02-pain-form-card {
+    #p02-pain-form-card {
       position: absolute;
       left: 50%;
       top: 32cqh;
@@ -83,16 +83,16 @@
       opacity: 0;
     }
 
-    .02-pain-field {
+    .p02-pain-field {
       padding: 2.4cqw 0;
       text-align: center;
     }
 
-    .02-pain-field + .02-pain-field {
+    .p02-pain-field + .p02-pain-field {
       border-top: 0.07cqw solid #C9A84C;
     }
 
-    .02-pain-field-label {
+    .p02-pain-field-label {
       font-family: 'Raleway';
       font-weight: 400;
       font-size: 2.3cqw;
@@ -101,8 +101,8 @@
       letter-spacing: 0.02em;
     }
 
-    #02-pain-label-no-context,
-    #02-pain-label-no-qualifying {
+    #p02-pain-label-no-context,
+    #p02-pain-label-no-qualifying {
       position: absolute;
       left: 27cqw;
       top: 50cqh;
@@ -116,28 +116,28 @@
   </style>
 
   <div id="root" data-composition-id="02-pain" data-width="1080" data-height="1920">
-    <div id="02-pain-bg-field" class="clip" data-start="0" data-duration="7.488" data-track-index="0"></div>
+    <div id="p02-pain-bg-field" class="clip" data-start="0" data-duration="7.488" data-track-index="0"></div>
 
-    <div id="02-pain-v-guide" class="clip" data-start="0" data-duration="7.488" data-track-index="1"></div>
+    <div id="p02-pain-v-guide" class="clip" data-start="0" data-duration="7.488" data-track-index="1"></div>
 
-    <div id="02-pain-ring-big" class="clip" data-start="0" data-duration="7.488" data-track-index="2"></div>
+    <div id="p02-pain-ring-big" class="clip" data-start="0" data-duration="7.488" data-track-index="2"></div>
 
-    <div id="02-pain-ring-small" class="clip" data-start="0" data-duration="7.488" data-track-index="3"></div>
+    <div id="p02-pain-ring-small" class="clip" data-start="0" data-duration="7.488" data-track-index="3"></div>
 
-    <div id="02-pain-form-card" class="clip" data-start="0" data-duration="7.488" data-track-index="4">
-      <div class="02-pain-field">
-        <div class="02-pain-field-label">Name</div>
+    <div id="p02-pain-form-card" class="clip" data-start="0" data-duration="7.488" data-track-index="4">
+      <div class="p02-pain-field">
+        <div class="p02-pain-field-label">Name</div>
       </div>
-      <div class="02-pain-field">
-        <div class="02-pain-field-label">Email</div>
+      <div class="p02-pain-field">
+        <div class="p02-pain-field-label">Email</div>
       </div>
     </div>
 
-    <div id="02-pain-label-no-context" class="clip" data-start="2.6208" data-duration="1.122" data-track-index="5">
+    <div id="p02-pain-label-no-context" class="clip" data-start="2.6208" data-duration="1.122" data-track-index="5">
       No context
     </div>
 
-    <div id="02-pain-label-no-qualifying" class="clip" data-start="3.744" data-duration="1.1232" data-track-index="5">
+    <div id="p02-pain-label-no-qualifying" class="clip" data-start="3.744" data-duration="1.1232" data-track-index="5">
       No qualifying
     </div>
   </div>
@@ -147,24 +147,24 @@
     const tl = gsap.timeline({ paused: true });
 
     // ambient — vertical drafting guide fades in
-    tl.fromTo('#02-pain-v-guide', { opacity: 0 }, { opacity: 0.35, duration: 0.8, ease: 'power1.out' }, 0);
+    tl.fromTo('#p02-pain-v-guide', { opacity: 0 }, { opacity: 0.35, duration: 0.8, ease: 'power1.out' }, 0);
 
     // ambient — geo rings arrive, then idle-rotate for the whole shot (subtle parallax under the fixed card)
-    tl.fromTo('#02-pain-ring-big', { opacity: 0, scale: 0.92 }, { opacity: 0.24, scale: 1, duration: 1.0, ease: 'power2.out' }, 0.1);
-    tl.to('#02-pain-ring-big', { rotation: 10, duration: 7.488, ease: 'none' }, 0);
+    tl.fromTo('#p02-pain-ring-big', { opacity: 0, scale: 0.92 }, { opacity: 0.24, scale: 1, duration: 1.0, ease: 'power2.out' }, 0.1);
+    tl.to('#p02-pain-ring-big', { rotation: 10, duration: 7.488, ease: 'none' }, 0);
 
-    tl.fromTo('#02-pain-ring-small', { opacity: 0, scale: 0.9 }, { opacity: 0.3, scale: 1, duration: 1.0, ease: 'power2.out' }, 0.25);
-    tl.to('#02-pain-ring-small', { rotation: -14, duration: 7.488, ease: 'none' }, 0);
+    tl.fromTo('#p02-pain-ring-small', { opacity: 0, scale: 0.9 }, { opacity: 0.3, scale: 1, duration: 1.0, ease: 'power2.out' }, 0.25);
+    tl.to('#p02-pain-ring-small', { rotation: -14, duration: 7.488, ease: 'none' }, 0);
 
     // Scene 1 (0.0-2.6208s) — the bare two-field card fades in dead-center
-    tl.fromTo('#02-pain-form-card', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' }, 0.1);
+    tl.fromTo('#p02-pain-form-card', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' }, 0.1);
 
     // Scene 2 (2.6208-4.8672s) — "No context." / "No qualifying." hard-cut token swap, no fade/slide
-    tl.set('#02-pain-label-no-context', { opacity: 1 }, 2.6208);
-    tl.set('#02-pain-label-no-qualifying', { opacity: 1 }, 3.744);
+    tl.set('#p02-pain-label-no-context', { opacity: 1 }, 2.6208);
+    tl.set('#p02-pain-label-no-qualifying', { opacity: 1 }, 3.744);
 
     // Scene 3 (4.8672s -> end) — "Just noise." labels clear (clip window ends), card shrugs to 50% opacity and holds to the cut
-    tl.to('#02-pain-form-card', { opacity: 0.5, duration: 0.6, ease: 'power1.inOut' }, 4.8672);
+    tl.to('#p02-pain-form-card', { opacity: 0.5, duration: 0.6, ease: 'power1.inOut' }, 4.8672);
 
     window.__timelines['02-pain'] = tl;
   </script>

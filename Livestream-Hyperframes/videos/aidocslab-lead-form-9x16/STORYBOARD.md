@@ -23,7 +23,7 @@ mode: autonomous
 - voiceover: "Somebody visited your site last night. Did you know?"
 - duration: 3.2s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/01-hook.html
 - type: hook
 - persuasion: Pain validation
@@ -44,7 +44,7 @@ Scene 3 (2.8–4.0s): hold. The dimmed majority stays static; the one gold-lit f
 - voiceover: "A plain contact form barely gets a name and an email. No context. No qualifying. Just noise."
 - duration: 7.488s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/02-pain.html
 - type: pain_point
 - persuasion: Pain agitation
@@ -65,7 +65,7 @@ Scene 3 (2.6–4.0s): at "Just noise," the labels clear and the bare form card i
 - voiceover: "Meet the AI lead capture form — built into every AI Docs Lab page."
 - duration: 5.141s
 - transition_in: zoom-through
-- status: outline
+- status: animated
 - src: compositions/frames/03-product-intro.html
 - type: product_intro
 - persuasion: Negative contrast
@@ -87,7 +87,7 @@ Scene 3 (2.4–4.0s): on "AI Docs Lab page," the tagline text exits (fade + slig
 - voiceover: "It's live 24/7 — qualifying leads while you sleep."
 - duration: 4.373s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/04-benefit-247.html
 - type: benefit_highlight
 - persuasion: Feature-to-benefit translation
@@ -108,7 +108,7 @@ Scene 3 (3.0–4.5s): on "qualifying leads while you sleep," the backdrop settle
 - voiceover: "Niche. Ideal client. Their offer. Their biggest problem — it asks before you ever have to."
 - duration: 5.909s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/05-benefit-qualify.html
 - type: benefit_highlight
 - persuasion: Show-don't-tell proof
@@ -130,7 +130,7 @@ Scene 4 (3.4–5.0s): on "their biggest problem," the cursor clicks the "Biggest
 - voiceover: "The moment they submit — it's already on your calendar."
 - duration: 3.2s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/06-benefit-booking.html
 - type: benefit_highlight
 - persuasion: Friction reduction
@@ -151,7 +151,7 @@ Scene 3 (3.4–4.5s): hold. The filled calendar slot reads clean and still; a th
 - voiceover: "Higher conversion. Zero manual entry. Calls that are already qualified."
 - duration: 5.12s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/07-benefit-montage.html
 - type: benefit_highlight
 - persuasion: Value stacking
@@ -172,7 +172,7 @@ Scene 3 (2.9–4.5s): hard cut clears it; "CALLS THAT ARE ALREADY QUALIFIED" lan
 - voiceover: "Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours."
 - duration: 8.256s
 - transition_in: zoom-through
-- status: outline
+- status: animated
 - src: compositions/frames/08-cta.html
 - type: cta
 - persuasion: Risk reversal
