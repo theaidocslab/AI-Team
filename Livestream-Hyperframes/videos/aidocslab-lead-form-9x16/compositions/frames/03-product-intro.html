@@ -173,7 +173,7 @@
       // Build the typed headline as one span per character (deterministic split
       // of a fixed string — no Date.now / Math.random), each revealed via a
       // staggered opacity fromTo so it reads as characters materializing
-      // left-to-right, capped by a blinking cursor.
+      // left-to-right, capped by a solid cursor that holds through typing.
       var HEADLINE_TEXT = 'Meet the AI lead capture form';
       HEADLINE_TEXT.split('').forEach(function (ch) {
         var span = document.createElement('span');
