@@ -1,0 +1,475 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Raleway";
+      src: url("assets/fonts/raleway.woff2") format("woff2");
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: "Raleway", sans-serif;
+    }
+
+    /* ---- full-bleed backdrop (own clip, static — no camera motion) ---- */
+    .bq5-bg {
+      position: absolute;
+      inset: 0;
+      background: #eee3c5;
+    }
+    .bq5-ring {
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      width: 920px;
+      height: 920px;
+      border-radius: 50%;
+      border: 1px solid #c9a84c;
+      opacity: 0.28;
+      transform: translate(-50%, -50%);
+    }
+    .bq5-ring::before {
+      content: "";
+      position: absolute;
+      inset: 9%;
+      border-radius: 50%;
+      border: 1px dashed #c9a84c;
+      opacity: 0.6;
+    }
+
+    /* ---- camera world (scale + translate written by JS only) ---- */
+    .bq5-world {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    /* ---- form card ---- */
+    .bq5-card {
+      position: absolute;
+      left: 110px;
+      top: 460px;
+      width: 860px;
+      height: 696px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid #c9a84c;
+      overflow: visible; /* dropdown floats past the card's own box */
+    }
+    .bq5-eyebrow {
+      position: absolute;
+      left: 40px;
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #e8c97a;
+    }
+    #bq5-eyebrow-1 {
+      top: 40px;
+    }
+    #bq5-eyebrow-2 {
+      top: 508px;
+    }
+
+    .bq5-label {
+      position: absolute;
+      left: 40px;
+      width: 780px;
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e8c97a;
+    }
+    .bq5-input {
+      position: absolute;
+      left: 40px;
+      width: 780px;
+      height: 84px;
+      border: 1px solid #c9a84c;
+      background: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    .bq5-value {
+      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+      font-size: 26px;
+      color: #0a0a0a;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .bq5-caret {
+      display: inline-block;
+      width: 3px;
+      height: 28px;
+      margin-left: 4px;
+      background: #0a0a0a;
+      vertical-align: -4px;
+      opacity: 0;
+    }
+    .bq5-chevron {
+      position: absolute;
+      right: 26px;
+      top: 50%;
+      margin-top: -14px;
+      font-size: 22px;
+      color: #5a5a5a;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    #bq5-label-1 {
+      top: 76px;
+    }
+    #bq5-input-1 {
+      top: 104px;
+    }
+    #bq5-label-2 {
+      top: 216px;
+    }
+    #bq5-input-2 {
+      top: 244px;
+    }
+    #bq5-label-3 {
+      top: 356px;
+    }
+    #bq5-input-3 {
+      top: 384px;
+    }
+    #bq5-label-4 {
+      top: 544px;
+    }
+    #bq5-input-4 {
+      top: 572px;
+    }
+
+    /* ---- dropdown panel ---- */
+    .bq5-dropdown {
+      position: absolute;
+      left: 40px;
+      top: 664px;
+      width: 780px;
+      background: #ffffff;
+      border: 1px solid #c9a84c;
+      transform-origin: 50% 0%;
+      z-index: 2;
+    }
+    .bq5-option {
+      position: relative;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      border-bottom: 1px solid #c9a84c;
+      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+      font-size: 21px;
+      color: #5a5a5a;
+    }
+    .bq5-option:last-child {
+      border-bottom: none;
+    }
+    .bq5-option-check {
+      position: absolute;
+      right: 24px;
+      font-size: 22px;
+      color: #e8c97a;
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: 50% 50%;
+    }
+
+    /* ---- cursor + ripples ---- */
+    .bq5-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 44px;
+      height: 44px;
+      z-index: 10;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .bq5-ripple {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      margin-left: -45px;
+      margin-top: -45px;
+      border-radius: 50%;
+      border: 2px solid #e8c97a;
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+      will-change: transform;
+    }
+  </style>
+
+  <div id="root" data-composition-id="05-benefit-qualify" data-width="1080" data-height="1920">
+    <div
+      class="clip bq5-bg"
+      id="bq5-bg"
+      data-start="0"
+      data-duration="5.909"
+      data-track-index="0"
+    >
+      <div class="bq5-ring"></div>
+    </div>
+
+    <div class="bq5-world" id="bq5-world">
+      <div class="bq5-card" id="bq5-card">
+        <div class="bq5-eyebrow" id="bq5-eyebrow-1">Your business</div>
+
+        <div class="bq5-label" id="bq5-label-1">Your niche or specialty *</div>
+        <div class="bq5-input" id="bq5-input-1">
+          <span class="bq5-value" id="bq5-value-1"></span
+          ><span class="bq5-caret" id="bq5-caret-1"></span>
+        </div>
+
+        <div class="bq5-label" id="bq5-label-2">Who is your ideal client? *</div>
+        <div class="bq5-input" id="bq5-input-2">
+          <span class="bq5-value" id="bq5-value-2"></span>
+        </div>
+
+        <div class="bq5-label" id="bq5-label-3">Your main offer &amp; price *</div>
+        <div class="bq5-input" id="bq5-input-3">
+          <span class="bq5-value" id="bq5-value-3"></span>
+        </div>
+
+        <div class="bq5-eyebrow" id="bq5-eyebrow-2">Final details</div>
+
+        <div class="bq5-label" id="bq5-label-4">Biggest lead generation problem *</div>
+        <div class="bq5-input" id="bq5-input-4">
+          <span class="bq5-value" id="bq5-value-4"></span>
+          <span class="bq5-chevron" id="bq5-chevron">&#9662;</span>
+        </div>
+
+        <div class="bq5-dropdown" id="bq5-dropdown">
+          <div class="bq5-option">I get traffic but nobody books a call</div>
+          <div class="bq5-option">I don't know how to write copy that converts</div>
+          <div class="bq5-option">I have no landing page at all</div>
+          <div class="bq5-option" id="bq5-option-4">
+            My page exists but generates zero leads
+            <span class="bq5-option-check" id="bq5-option-check">&#10003;</span>
+          </div>
+          <div class="bq5-option">I rely 100% on referrals and need to change that</div>
+        </div>
+      </div>
+
+      <div class="bq5-ripple" id="bq5-ripple-1"></div>
+      <div class="bq5-ripple" id="bq5-ripple-2"></div>
+      <div class="bq5-ripple" id="bq5-ripple-3"></div>
+      <div class="bq5-ripple" id="bq5-ripple-4"></div>
+
+      <svg class="bq5-cursor" id="bq5-cursor" viewBox="0 0 44 44" fill="none">
+        <path
+          d="M6 3 L6 34 L14.5 26.5 L20 40 L26 37.5 L20.5 24 L33 24 Z"
+          fill="#e8c97a"
+          stroke="#0a0a0a"
+          stroke-width="2"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      var world = document.getElementById("bq5-world");
+      var cam = { scale: 1, x: 0, y: 0 };
+      function applyCamera() {
+        world.style.transform =
+          "translate(" + cam.x + "px, " + cam.y + "px) scale(" + cam.scale + ")";
+      }
+      applyCamera();
+
+      // Cursor motion lives ENTIRELY on GSAP's own x/y/scale properties so the
+      // translate (move) and scale (click press) tweens compose into one
+      // transform automatically — never write cursor.style.transform by hand,
+      // or a later scale tween would clobber the translate (and vice versa).
+      var cursor = document.getElementById("bq5-cursor");
+      gsap.set(cursor, { x: 900, y: 1230, opacity: 0 });
+
+      function moveCursor(x, y, dur, ease, at) {
+        tl.to(cursor, { x: x, y: y, duration: dur, ease: ease }, at);
+      }
+
+      function clickBeat(rippleId, inputId, x, y, at) {
+        var ripple = document.getElementById(rippleId);
+        gsap.set(ripple, { x: x, y: y, scale: 0, opacity: 0 });
+        tl.to(cursor, { scale: 0.82, duration: 0.07, ease: "power2.in", yoyo: true, repeat: 1 }, at);
+        if (inputId) {
+          tl.to(
+            "#" + inputId,
+            { scale: 0.985, duration: 0.07, ease: "power2.in", yoyo: true, repeat: 1 },
+            at,
+          );
+        }
+        tl.set(ripple, { opacity: 1 }, at + 0.02);
+        tl.to(
+          ripple,
+          { scale: 3.4, opacity: 0, duration: 0.4, ease: "power2.out", immediateRender: false },
+          at + 0.02,
+        );
+      }
+
+      // ---------------------------------------------------------------
+      // Scene 1 (0.0-1.1s): card already on screen; cursor enters and
+      // clicks into "Your niche or specialty" (field 1).
+      // ---------------------------------------------------------------
+      tl.fromTo(
+        cursor,
+        { x: 900, y: 1230, opacity: 0 },
+        { x: 250, y: 606, opacity: 1, duration: 0.55, ease: "power3.out" },
+        0,
+      );
+      clickBeat("bq5-ripple-1", "bq5-input-1", 250, 606, 0.55);
+
+      // ---------------------------------------------------------------
+      // Scene 2 (1.1-2.3s): niche field types letter-by-letter; camera
+      // pushes in toward field 1.
+      // ---------------------------------------------------------------
+      tl.to(cam, { scale: 1.06, y: 375.24, duration: 0.8, ease: "power2.out", onUpdate: applyCamera }, 1.1);
+
+      (function typeField1() {
+        var full = "Business mindset coaching";
+        var el = document.getElementById("bq5-value-1");
+        var caret = document.getElementById("bq5-caret-1");
+        var typeStart = 1.15;
+        var typeDur = 1.05;
+        var counter = { v: 0 };
+        tl.to(
+          counter,
+          {
+            v: full.length,
+            duration: typeDur,
+            ease: "none",
+            onUpdate: function () {
+              el.textContent = full.substring(0, Math.floor(counter.v));
+            },
+          },
+          typeStart,
+        );
+        tl.to(caret, { opacity: 1, duration: 0.01 }, typeStart);
+        var blink = { p: 0 };
+        tl.to(
+          blink,
+          {
+            p: Math.PI * 2 * 3,
+            duration: typeDur,
+            ease: "none",
+            onUpdate: function () {
+              caret.style.opacity = Math.sin(blink.p) > 0 ? "1" : "0";
+            },
+          },
+          typeStart,
+        );
+        tl.to(caret, { opacity: 0, duration: 0.15 }, typeStart + typeDur + 0.05);
+      })();
+
+      // ---------------------------------------------------------------
+      // Scene 3 (2.3-3.4s+): whip-pan down through ideal-client and
+      // main-offer fields — each a discrete filled beat.
+      // ---------------------------------------------------------------
+      // field 2 — ideal client
+      tl.to(cam, { scale: 1.08, y: 231.12, duration: 0.28, ease: "power2.inOut", onUpdate: applyCamera }, 2.3);
+      moveCursor(250, 746, 0.28, "power3.out", 2.3);
+      clickBeat("bq5-ripple-2", "bq5-input-2", 250, 746, 2.58);
+      (function fillField2() {
+        var el = document.getElementById("bq5-value-2");
+        el.textContent = "Women 35–50 who feel stuck in their careers";
+        tl.fromTo(
+          el,
+          { opacity: 0, x: -14 },
+          { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" },
+          2.7,
+        );
+      })();
+
+      // field 3 — main offer & price
+      tl.to(cam, { scale: 1.08, y: 79.92, duration: 0.25, ease: "power2.inOut", onUpdate: applyCamera }, 2.97);
+      moveCursor(250, 886, 0.25, "power3.out", 2.97);
+      clickBeat("bq5-ripple-3", "bq5-input-3", 250, 886, 3.22);
+      (function fillField3() {
+        var el = document.getElementById("bq5-value-3");
+        el.textContent = "90-day coaching program — $2,500";
+        tl.fromTo(
+          el,
+          { opacity: 0, x: -14 },
+          { opacity: 1, x: 0, duration: 0.22, ease: "power2.out" },
+          3.36,
+        );
+      })();
+
+      // ---------------------------------------------------------------
+      // Scene 4 (~3.55-5.35s): dropdown opens, selects the real option,
+      // closes on the choice; camera settles static and holds.
+      // ---------------------------------------------------------------
+      tl.to(cam, { scale: 1.05, y: -119.7, duration: 0.4, ease: "power2.inOut", onUpdate: applyCamera }, 3.55);
+      moveCursor(850, 1074, 0.35, "power3.out", 3.55);
+      clickBeat("bq5-ripple-4", "bq5-input-4", 850, 1074, 3.9);
+      tl.to("#bq5-chevron", { rotation: 180, duration: 0.2, ease: "power2.out" }, 3.9);
+
+      var dropdown = document.getElementById("bq5-dropdown");
+      tl.fromTo(
+        dropdown,
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" },
+        4.0,
+      );
+
+      moveCursor(400, 1348, 0.35, "power3.out", 4.45);
+      (function optionClickRipple() {
+        var ripple = document.getElementById("bq5-ripple-3"); // reuse — field3's ripple has fully faded by 4.8s
+        gsap.set(ripple, { x: 400, y: 1348, scale: 0, opacity: 0 });
+        tl.to(cursor, { scale: 0.82, duration: 0.07, ease: "power2.in", yoyo: true, repeat: 1 }, 4.8);
+        tl.set(ripple, { opacity: 1 }, 4.82);
+        tl.to(
+          ripple,
+          { scale: 3, opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false },
+          4.82,
+        );
+      })();
+
+      var option4 = document.getElementById("bq5-option-4");
+      var check = document.getElementById("bq5-option-check");
+      tl.to(option4, { backgroundColor: "rgba(232,201,122,0.25)", duration: 0.2, ease: "power1.out" }, 4.85);
+      tl.fromTo(
+        check,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.25, ease: "power3.out" },
+        4.9,
+      );
+
+      tl.to(dropdown, { scale: 0.9, opacity: 0, duration: 0.3, ease: "power2.in" }, 5.05);
+      tl.to("#bq5-chevron", { rotation: 0, duration: 0.2, ease: "power2.out" }, 5.05);
+
+      (function settleField4() {
+        var el = document.getElementById("bq5-value-4");
+        tl.set(el, { textContent: "My page exists but generates zero leads" }, 5.1);
+        tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, 5.1);
+      })();
+
+      window.__timelines["05-benefit-qualify"] = tl;
+    })();
+  </script>
+</template>

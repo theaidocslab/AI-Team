@@ -74,31 +74,31 @@
       color: #C9C2AC; /* pale stone — the "through-grey" starting tone */
     }
 
-    /* Scenes 3–4 — the logo-assemble lockup: bloom, slide-left, offer + attribution. */
+    /* Scenes 3–4 — the logo-assemble lockup: bloom, slide-left, offer + attribution.
+       Fixed-box absolute positioning throughout (not flex) so the lockup's centering
+       math is deterministic and never depends on the offer text's rendered width. */
     .c08-cta-outer {
       position: absolute;
       left: 50%;
-      top: 402.8px;
-      width: 31.8cqw;
-      margin-left: -15.9cqw;
+      top: 405px;
+      width: 700px;
+      height: 170px;
+      margin-left: -350px;
     }
 
     .c08-cta-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
       transform-origin: 50% 50%;
     }
 
-    .c08-cta-row {
-      display: flex;
-      align-items: center;
-    }
-
     .c08-cta-logo-slot {
-      width: 6cqw;
-      height: 6cqw;
-      flex: 0 0 6cqw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute;
+      left: 205px;
+      top: 0;
+      width: 110px;
+      height: 110px;
     }
 
     .c08-cta-logo {
@@ -108,7 +108,12 @@
     }
 
     .c08-cta-offer {
-      margin-left: 1.8cqw;
+      position: absolute;
+      left: 343px;
+      top: 0;
+      height: 110px;
+      display: flex;
+      align-items: center;
       font-family: 'Raleway', sans-serif;
       font-weight: 500;
       font-size: 14px; /* typography.label */
@@ -120,7 +125,10 @@
     }
 
     .c08-cta-attribution {
-      margin-top: 1.2cqw;
+      position: absolute;
+      left: 0;
+      top: 128px;
+      width: 100%;
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
       font-size: 15px; /* typography.attribution */
@@ -128,13 +136,15 @@
       text-transform: uppercase;
       color: #E8C97A; /* accent */
       text-align: center;
-      width: 100%;
     }
 
     .c08-cta-accent {
-      margin: 1cqw auto 0;
-      width: 18cqw;
+      position: absolute;
+      left: 50%;
+      top: 160px;
+      width: 340px;
       height: 1px;
+      margin-left: -170px;
       background: #0A0A0A; /* text-primary — the one ink accent line */
       transform-origin: 50% 50%;
     }
@@ -192,12 +202,10 @@
       data-track-index="3"
     >
       <div class="c08-cta-inner" id="c08-cta-inner">
-        <div class="c08-cta-row">
-          <div class="c08-cta-logo-slot">
-            <img class="c08-cta-logo" id="c08-cta-logo" src="assets/logo-icon.svg" alt="" />
-          </div>
-          <span class="c08-cta-offer" id="c08-cta-offer">$497 · Coaching Landing Page</span>
+        <div class="c08-cta-logo-slot">
+          <img class="c08-cta-logo" id="c08-cta-logo" src="assets/logo-icon.svg" alt="" />
         </div>
+        <div class="c08-cta-offer" id="c08-cta-offer">$497 · Coaching Landing Page</div>
         <div class="c08-cta-attribution" id="c08-cta-attribution">Live in 48 hours</div>
         <div class="c08-cta-accent" id="c08-cta-accent"></div>
       </div>
@@ -239,12 +247,13 @@
 
       // Scene 3 (2.2–3.2s): the mark spring-blooms from ZERO at dead center — power3-family
       // settle with a minimal overshoot + a hint of rotation as it grows (spring-pop-entrance).
-      // logo starts pre-offset right by the row's half-width so it reads as centered alone;
-      // it then slides left into its natural lockup slot as the offer reveals to its right.
+      // The logo's resting slot sits left of true canvas-center (to leave room for the offer);
+      // it starts pre-offset right by that exact difference so the bloom reads as dead-center,
+      // then slides left (x → 0) into its natural lockup slot as the offer reveals to its right.
       tl.fromTo(
         logo,
-        { scale: 0, opacity: 0, rotation: -6, x: 247.7 },
-        { scale: 1, opacity: 1, rotation: 0, x: 247.7, duration: 0.55, ease: 'back.out(1.1)' },
+        { scale: 0, opacity: 0, rotation: -6, x: 90 },
+        { scale: 1, opacity: 1, rotation: 0, x: 90, duration: 0.55, ease: 'back.out(1.1)' },
         2.2
       );
       tl.to(logo, { x: 0, duration: 0.5, ease: 'power2.out' }, 2.65);

@@ -1,0 +1,366 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Raleway";
+      src: url("assets/fonts/raleway.woff2") format("woff2");
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Raleway", sans-serif;
+      color: #0a0a0a;
+    }
+
+    .clip {
+      position: absolute;
+    }
+
+    /* ---------------------------------------------------------------
+       Backdrop — full-bleed day -> night sweep + one compass ring.
+       Lives on the lowest track, never painted on #root itself.
+       --------------------------------------------------------------- */
+    .f247-backdrop {
+      inset: 0;
+    }
+    .f247-day,
+    .f247-night {
+      position: absolute;
+      inset: 0;
+    }
+    .f247-day {
+      background: linear-gradient(160deg, #ffffff 0%, #eee3c5 100%);
+    }
+    .f247-night {
+      background: linear-gradient(160deg, #eee3c5 0%, #0a0a0a 100%);
+      opacity: 0;
+    }
+    .f247-ring {
+      position: absolute;
+      width: 52cqw;
+      height: 52cqw;
+      right: -15cqw;
+      top: 5cqh;
+      border: 0.12cqw solid #c9a84c;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    .f247-ring::before {
+      content: "";
+      position: absolute;
+      inset: 15%;
+      border: 0.12cqw dashed #c9a84c;
+      border-radius: 50%;
+    }
+
+    /* ---------------------------------------------------------------
+       Time indicator — supporting element, top of the content area.
+       --------------------------------------------------------------- */
+    .f247-time {
+      left: 8cqw;
+      top: 15cqh;
+      width: 84cqw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6cqh;
+      opacity: 0;
+    }
+    .f247-time-figure {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 5.3cqw;
+      line-height: 1;
+      color: #0a0a0a;
+    }
+    .f247-strip {
+      position: relative;
+      width: 100%;
+      height: 0.85cqh;
+      background: #eee3c5;
+      border-top: 0.12cqw solid #c9a84c;
+      border-bottom: 0.12cqw solid #c9a84c;
+      overflow: hidden;
+    }
+    .f247-strip-sweep {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #eee3c5 0%, #e8c97a 46%, #0a0a0a 100%);
+      transform-origin: left center;
+    }
+
+    /* ---------------------------------------------------------------
+       Card — the reconstructed lead-capture-form surface (cutout hero).
+       --------------------------------------------------------------- */
+    .f247-card {
+      left: 8cqw;
+      top: 30cqh;
+      width: 84cqw;
+      height: 46cqh;
+      box-sizing: border-box;
+      padding: 3.6cqh 5cqw;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+        #ffffff;
+      border: 0.12cqw solid #c9a84c;
+      opacity: 0;
+    }
+    .f247-card-head {
+      display: flex;
+      align-items: center;
+      gap: 3cqw;
+    }
+    .f247-card-icon {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 auto;
+      border: 0.12cqw solid #c9a84c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #e8c97a;
+    }
+    .f247-card-title {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3.7cqw;
+      line-height: 1.15;
+      color: #0a0a0a;
+    }
+    .f247-section-label {
+      margin-top: 3cqh;
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e8c97a;
+    }
+    .f247-field-row {
+      display: flex;
+      gap: 3cqw;
+      margin-top: 2.4cqh;
+    }
+    .f247-field {
+      flex: 1;
+      min-width: 0;
+    }
+    .f247-field-label {
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e8c97a;
+      margin-bottom: 0.9cqh;
+    }
+    .f247-field-box {
+      height: 5.2cqh;
+      display: flex;
+      align-items: center;
+      padding: 0 1.2cqw;
+      border: 0.12cqw solid #c9a84c;
+      box-sizing: border-box;
+    }
+    .f247-field-placeholder {
+      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #5a5a5a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .f247-pulse {
+      position: absolute;
+      top: -1.1cqw;
+      right: -1.1cqw;
+      width: 2.4cqw;
+      height: 2.4cqw;
+      border-radius: 50%;
+      background: #e8c97a;
+      border: 0.12cqw solid #c9a84c;
+    }
+  </style>
+
+  <div id="root" data-composition-id="04-benefit-247" data-width="1080" data-height="1920">
+    <div
+      class="clip f247-backdrop"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="0"
+    >
+      <div class="f247-day"></div>
+      <div class="f247-night" id="f247-night"></div>
+      <div class="f247-ring" id="f247-ring"></div>
+    </div>
+
+    <div
+      class="clip f247-card"
+      id="f247-card"
+      data-start="0"
+      data-duration="4.373"
+      data-track-index="1"
+    >
+      <div class="f247-card-head" id="f247-card-head">
+        <div class="f247-card-icon">F</div>
+        <div class="f247-card-title">Lead Capture Form</div>
+      </div>
+
+      <div class="f247-section-label" id="f247-section-label">Your information</div>
+
+      <div class="f247-field-row" id="f247-row1">
+        <div class="f247-field">
+          <div class="f247-field-label">First name *</div>
+          <div class="f247-field-box"><span class="f247-field-placeholder">Sarah</span></div>
+        </div>
+        <div class="f247-field">
+          <div class="f247-field-label">Last name *</div>
+          <div class="f247-field-box"><span class="f247-field-placeholder">Johnson</span></div>
+        </div>
+      </div>
+
+      <div class="f247-field-row" id="f247-row2">
+        <div class="f247-field">
+          <div class="f247-field-label">Email address *</div>
+          <div class="f247-field-box">
+            <span class="f247-field-placeholder">sarah@yourbusiness.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="f247-pulse" id="f247-pulse"></div>
+    </div>
+
+    <div
+      class="clip f247-time"
+      id="f247-time"
+      data-start="1.35"
+      data-duration="3.023"
+      data-track-index="2"
+    >
+      <div class="f247-time-figure">24/7</div>
+      <div class="f247-strip">
+        <div class="f247-strip-sweep" id="f247-strip-sweep"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["04-benefit-247"] = tl;
+
+    /* -----------------------------------------------------------
+       Scene 1 (0.0-1.5s) — the card slides up from below and
+       settles; label chrome (head, section, fields) staggers in
+       behind it. Hero is clearly visible well before t=0.5s.
+       ----------------------------------------------------------- */
+    tl.fromTo(
+      "#f247-card",
+      { y: 210, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+      0,
+    );
+
+    tl.fromTo(
+      "#f247-ring",
+      { opacity: 0 },
+      { opacity: 0.3, duration: 1.0, ease: "power1.out" },
+      0.1,
+    );
+
+    tl.fromTo(
+      "#f247-card-head",
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
+      0.12,
+    );
+
+    tl.fromTo(
+      "#f247-section-label",
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      0.42,
+    );
+
+    tl.fromTo(
+      "#f247-row1",
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      0.68,
+    );
+
+    tl.fromTo(
+      "#f247-row2",
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      0.95,
+    );
+
+    /* -----------------------------------------------------------
+       Scene 2 (1.5-3.0s) — "24/7" lands: the top strip sweeps
+       light -> dark, the backdrop begins its day -> night
+       crossfade, and the corner pulse begins its steady breathing.
+       ----------------------------------------------------------- */
+    tl.fromTo(
+      "#f247-time",
+      { opacity: 0, y: -14 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      1.35,
+    );
+
+    tl.fromTo(
+      "#f247-strip-sweep",
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1.4, ease: "power1.inOut" },
+      1.55,
+    );
+
+    tl.fromTo(
+      "#f247-night",
+      { opacity: 0 },
+      { opacity: 1, duration: 1.6, ease: "power1.inOut" },
+      1.55,
+    );
+
+    /* Corner pulse — "always on" signal. Bounded sine breathing,
+       phase-driven so it starts at rest (sin(0)=0) with no jump
+       off the entry, and keeps breathing through the Scene 3 hold. */
+    const pulseEl = document.getElementById("f247-pulse");
+    const PULSE_START = 1.55;
+    const PULSE_DUR = 4.373 - PULSE_START;
+    const PULSE_PERIOD = 1.8;
+    const PULSE_CYCLES = PULSE_DUR / PULSE_PERIOD;
+    const PULSE_SCALE_AMP = 0.08;
+    const pulsePhase = { p: 0 };
+
+    tl.to(
+      pulsePhase,
+      {
+        p: Math.PI * 2 * PULSE_CYCLES,
+        duration: PULSE_DUR,
+        ease: "none",
+        onUpdate: () => {
+          const s = Math.sin(pulsePhase.p);
+          pulseEl.style.transform = `scale(${1 + s * PULSE_SCALE_AMP})`;
+          pulseEl.style.opacity = String(0.78 + s * 0.22);
+        },
+      },
+      PULSE_START,
+    );
+
+    /* Scene 3 (3.0-4.373s) — backdrop settles darkest and holds;
+       the pulse above is the only motion left in the frame. */
+  </script>
+</template>

@@ -1,0 +1,262 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Raleway';
+      src: url('assets/fonts/raleway.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Raleway', sans-serif;
+      --bg-primary: #FFFFFF;
+      --text-primary: #0A0A0A;
+      --text-secondary: #5A5A5A;
+      --accent: #E8C97A;
+      --line: #C9A84C;
+    }
+
+    .clip {
+      will-change: opacity;
+    }
+
+    /* Scene 1 — flat bg-primary ground, the contrast turn from Frame 2's black */
+    .pi03-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-primary);
+    }
+
+    /* Tagline group: eyebrow label + typed headline, centered in the upper third
+       (Cartesian's 1:1 cover behavior: headline upper, mark behind) */
+    .pi03-tagline-group {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 15cqh;
+      will-change: transform, opacity;
+    }
+
+    .pi03-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+    }
+
+    .pi03-headline {
+      margin-top: 2.4cqh;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 3.6cqw;
+      line-height: 1.35;
+      color: var(--text-primary);
+      text-align: center;
+      max-width: 82cqw;
+    }
+
+    .pi03-char {
+      opacity: 0;
+    }
+
+    .pi03-cursor {
+      display: inline-block;
+      font-weight: 400;
+      color: var(--accent);
+      opacity: 0;
+    }
+
+    /* Mark stage: gold bolt-on-black mark, centered behind/below the headline,
+       recentered + pushed in for Scene 3's held close-up */
+    .pi03-mark-camera {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .pi03-mark-cluster {
+      position: relative;
+      width: 30cqw;
+      height: 30cqw;
+      display: grid;
+      place-items: center;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    .pi03-geo-ring {
+      grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 0.15cqw dashed var(--line);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .pi03-mark-stage {
+      grid-column: 1;
+      grid-row: 1;
+      width: 20cqw;
+      height: 20cqw;
+      display: block;
+      transform-origin: 50% 50%;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="03-product-intro"
+    data-width="1080"
+    data-height="1080"
+    data-duration="5.141"
+  >
+    <div
+      class="clip pi03-bg"
+      id="pi03-bg"
+      data-start="0"
+      data-duration="5.141"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="clip pi03-tagline-group"
+      id="pi03-tagline-group"
+      data-start="0"
+      data-duration="5.141"
+      data-track-index="1"
+    >
+      <div class="pi03-label" id="pi03-label">Introducing</div>
+      <div class="pi03-headline" id="pi03-headline"></div>
+    </div>
+
+    <div
+      class="clip pi03-mark-camera"
+      id="pi03-mark-camera"
+      data-start="0"
+      data-duration="5.141"
+      data-track-index="2"
+    >
+      <div class="pi03-mark-cluster" id="pi03-mark-cluster">
+        <div class="pi03-geo-ring" id="pi03-geo-ring"></div>
+        <img class="pi03-mark-stage" id="pi03-mark-stage" src="assets/logo-icon.svg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="03-product-intro"]');
+      var label = root.querySelector('#pi03-label');
+      var headline = root.querySelector('#pi03-headline');
+      var taglineGroup = root.querySelector('#pi03-tagline-group');
+      var cluster = root.querySelector('#pi03-mark-cluster');
+      var geoRing = root.querySelector('#pi03-geo-ring');
+      var markStage = root.querySelector('#pi03-mark-stage');
+
+      var TOTAL_DURATION = 5.141;
+
+      // Build the typed headline as one span per character (deterministic split
+      // of a fixed string — no Date.now / Math.random), each revealed via a
+      // staggered opacity fromTo so it reads as characters materializing
+      // left-to-right, capped by a solid cursor that holds through typing.
+      var HEADLINE_TEXT = 'Meet the AI lead capture form';
+      HEADLINE_TEXT.split('').forEach(function (ch) {
+        var span = document.createElement('span');
+        span.className = 'pi03-char';
+        span.textContent = ch === ' ' ? ' ' : ch;
+        headline.appendChild(span);
+      });
+      var cursor = document.createElement('span');
+      cursor.className = 'pi03-cursor';
+      cursor.id = 'pi03-cursor';
+      cursor.textContent = '|';
+      headline.appendChild(cursor);
+
+      var chars = root.querySelectorAll('.pi03-char');
+
+      var tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0.0–1.2s): flat white ground already static from t=0.
+      // Eyebrow label fades/lifts in first, centered upper third.
+      tl.fromTo(
+        label,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+        0.05
+      );
+
+      // Headline types in — per-character stagger completing by ~1.2s.
+      var TYPE_START = 0.35;
+      var TYPE_DUR = 0.8;
+      var STAGGER = TYPE_DUR / chars.length;
+      chars.forEach(function (span, i) {
+        tl.fromTo(
+          span,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.12, ease: 'none' },
+          TYPE_START + i * STAGGER
+        );
+      });
+      tl.set(cursor, { opacity: 1 }, TYPE_START);
+      tl.to(cursor, { opacity: 0, duration: 0.25, ease: 'power1.out' }, 1.2);
+
+      // Scene 2 (1.2–2.4s): the gold bolt-on-black mark pops in centered behind/
+      // below the headline — spring-pop-entrance, calm power3 settle, no bounce
+      // (Cartesian's no-bounce rule). Cluster starts shifted down so the mark
+      // reads as sitting below the headline before Scene 3 recenters it.
+      tl.set(cluster, { y: 130 }, 0);
+      tl.fromTo(
+        markStage,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: 'power3.out' },
+        1.3
+      );
+
+      // Scene 3 (2.4–4.0s): tagline exits (fade + slight upward slide), the
+      // layout recenters on the mark, a geo-ring drifts in behind it, and the
+      // camera pushes in to a held close-up. Holds static from there to the
+      // zoom-through transition out.
+      tl.to(
+        taglineGroup,
+        { opacity: 0, y: -20, duration: 0.5, ease: 'power2.out' },
+        2.4
+      );
+      tl.to(
+        cluster,
+        { y: 0, scale: 1.4, duration: 1.6, ease: 'power2.out' },
+        2.4
+      );
+      tl.fromTo(
+        geoRing,
+        { opacity: 0, scale: 0.85 },
+        { opacity: 0.2, scale: 1, duration: 0.6, ease: 'power2.out' },
+        3.0
+      );
+      tl.to(
+        geoRing,
+        { rotation: 20, duration: TOTAL_DURATION - 3.6, ease: 'none' },
+        3.6
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['03-product-intro'] = tl;
+    })();
+  </script>
+</template>
