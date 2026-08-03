@@ -28,7 +28,7 @@ mode: autonomous
 - type: hook
 - persuasion: Pain validation
 - beat: tension
-- blueprint: dataviz-countup (Adapt)
+- blueprint: dataviz-countup
 - focal: (typography/data only — no captured asset; render the counter itself as the hero)
 - roles: counter = cutout (foreground subject) · backdrop = background (flat `text-primary` #0A0A0A, no bleed)
 
@@ -49,7 +49,7 @@ Scene 3 (2.8–4.0s): hold. The dimmed majority stays static; the one gold-lit f
 - type: pain_point
 - persuasion: Pain agitation
 - beat: frustration
-- blueprint: kinetic-type-beats (Adapt — Problem sub-shape)
+- blueprint: kinetic-type-beats
 - focal: (typography + one plain form artifact, no captured asset)
 - roles: bare-form = cutout · pain-labels = supporting
 
@@ -70,7 +70,7 @@ Scene 3 (2.6–4.0s): at "Just noise," the labels clear and the bare form card i
 - type: product_intro
 - persuasion: Negative contrast
 - beat: relief
-- blueprint: logo-assemble-lockup (Reproduce — brand-reveal-assemble-zoom variant)
+- blueprint: logo-assemble-lockup
 - asset_candidates: assets/logo-icon.svg — the brand's gold lightning-bolt mark on black
 - focal: assets/logo-icon.svg
 - roles: logo-icon.svg = cutout (foreground hero mark) · tagline = supporting
@@ -92,7 +92,7 @@ Scene 3 (2.4–4.0s): on "AI Docs Lab page," the tagline text exits (fade + slig
 - type: benefit_highlight
 - persuasion: Feature-to-benefit translation
 - beat: control
-- blueprint: device-surface-showcase (Adapt — static-tour variant)
+- blueprint: device-surface-showcase
 - focal: (reconstructed form surface — real fields from `capture/extracted/visible-text.txt`, no captured screenshot exists)
 - roles: form-surface = cutout · time-indicator = supporting · backdrop = background
 
@@ -113,7 +113,7 @@ Scene 3 (3.0–4.5s): on "qualifying leads while you sleep," the backdrop settle
 - type: benefit_highlight
 - persuasion: Show-don't-tell proof
 - beat: clarity
-- blueprint: cursor-ui-demo (Reproduce — Key_Feature variant)
+- blueprint: cursor-ui-demo
 - focal: (reconstructed form surface, real field copy from `capture/extracted/visible-text.txt`)
 - roles: form-surface = cutout · cursor = supporting (the protagonist) · backdrop = background
 
@@ -135,7 +135,7 @@ Scene 4 (3.4–5.0s): on "their biggest problem," the cursor clicks the "Biggest
 - type: benefit_highlight
 - persuasion: Friction reduction
 - beat: ease
-- blueprint: video-text-pivot (Adapt)
+- blueprint: video-text-pivot
 - focal: (reconstructed form + calendar surfaces, no captured asset)
 - roles: booking-field = cutout (Scene 1) · calendar-slot = cutout (Scene 2, same anchor)
 
@@ -156,7 +156,7 @@ Scene 3 (3.4–4.5s): hold. The filled calendar slot reads clean and still; a th
 - type: benefit_highlight
 - persuasion: Value stacking
 - beat: confidence
-- blueprint: kinetic-type-beats (Adapt — Benefits staccato variant)
+- blueprint: kinetic-type-beats
 - focal: (typography only, no asset)
 - roles: (none — pure type beat)
 
@@ -177,7 +177,7 @@ Scene 3 (2.9–4.5s): hard cut clears it; "CALLS THAT ARE ALREADY QUALIFIED" lan
 - type: cta
 - persuasion: Risk reversal
 - beat: urgency-to-act
-- blueprint: logo-assemble-lockup (Reproduce — text-clears-mark-blooms-lockup variant)
+- blueprint: logo-assemble-lockup
 - asset_candidates: assets/logo-icon.svg — the brand's gold lightning-bolt mark on black
 - focal: assets/logo-icon.svg
 - roles: logo-icon.svg = cutout (foreground hero mark) · offer-line = supporting
