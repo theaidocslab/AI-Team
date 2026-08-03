@@ -1,6 +1,6 @@
 ---
 format: 1080x1920
-duration: 35s
+duration: 43s
 message: "Never miss a lead again — your AI lead capture form works 24/7, auto-qualifies, and books faster."
 arc: Feature-Benefit Cascade — Hook → Pain → Product Intro → Benefit ×4 → CTA
 audience: coaches, consultants, and service professionals
