@@ -35,6 +35,13 @@
         "aidocslab-lead-form-9x16"
       ],
       "updated_at": "2026-08-03T04:17:07.039Z"
+    },
+    "style_preset.product-launch-video": {
+      "value": "cartesian",
+      "confirmed_in": [
+        "aidocslab-lead-form-9x16"
+      ],
+      "updated_at": "2026-08-03T15:28:12.914Z"
     }
   },
   "sightings": {}

@@ -1,0 +1,65 @@
+SOURCE: local mirror of https://demo.theaidocslab.com (live URL blocked by this
+session's network egress policy — captured by hand from
+/home/user/AI-Team/demo/live-demo-coach.html instead of a live crawl).
+
+BRAND: The AI Docs Lab™ — theaidocslab.com
+
+OFFER: A custom AI-powered landing page for coaches, consultants, and service
+professionals. $297 one-time fee (no monthly software cost), delivered within
+48 hours of an accepted application. Built personally by Dr. Eric using an
+AI-powered production system. Agency-equivalent value: $5,000+.
+
+WHAT'S INCLUDED (per the site's own "what you get" list):
+- Custom Landing Page
+- Conversion Copy
+- 24/7 Trained AI Chatbot
+- AI Crawler Plugin (gets the page discovered by ChatGPT, Claude, Gemini,
+  Perplexity — not just Google)
+- Lead Capture Form  <-- the feature this video is about
+- Booking Integration
+- Free Domain + First 30 Days Hosting
+
+THE LEAD CAPTURE FORM — real fields, in order:
+  Section "Your information":
+    - First name * (placeholder: "Sarah")
+    - Last name * (placeholder: "Johnson")
+    - Email address * (placeholder: "sarah@yourbusiness.com")
+    - Website or social link (placeholder: "instagram.com/yourhandle or
+      yoursite.com") — hint: "Helps me understand your current brand"
+  Section "Your business":
+    - Your niche or specialty * (placeholder: "e.g. Business mindset coaching,
+      Family law, Real estate, HVAC contracting")
+    - Who is your ideal client? * (placeholder: "e.g. Women 35–50 who feel
+      stuck in their careers, or homeowners needing emergency repairs")
+    - Your main offer & price * (placeholder: "e.g. 90-day coaching program —
+      $2,500, or Free consultation + $1,500 retainer")
+    - Biggest result you get for clients * (textarea) — hint: "Be specific —
+      this becomes your headline"
+  Section "Final details":
+    - Biggest lead generation problem * (dropdown): "I get traffic but nobody
+      books a call" / "I don't know how to write copy that converts" / "I have
+      no landing page at all" / "My page exists but generates zero leads" /
+      "I rely 100% on referrals and need to change that"
+    - Your booking link (Calendly or other) (placeholder: "calendly.com/
+      yourname") — hint: "We'll embed this directly into your page"
+    - Anything else I should know? (textarea)
+  Submit button: "Yes — Apply For My $297 Page Now →"
+
+WHY THE FORM MATTERS (site's own framing — useful for benefit copy):
+- It runs 24/7 — "qualifying leads while they sleep."
+- It doesn't just collect a name/email — it auto-qualifies: niche, ideal
+  client, offer, and the lead's single biggest lead-gen problem are captured
+  up front, before any human has to ask.
+- It feeds straight into booking (the Calendly/booking-link field) — no
+  manual back-and-forth to get someone on the calendar.
+- Reviewed personally within 24 hours, page live within 48 hours — the whole
+  point is speed and zero missed leads vs. "posting and hoping."
+- Framed against the alternative: most funnel platforms charge $97–$297/month
+  for the page builder ALONE, then bill the chatbot as a separate $97/month
+  add-on — this is a one-time fee, no recurring software cost.
+
+TONE: Confident, plainspoken, a little urgent (build queue is capped at 5/week)
+but not hype-y. Founder-led ("Dr. Eric reviews every application personally").
+
+AUDIENCE: Coaches, consultants, and service professionals who currently have
+no landing page, or one that "generates zero leads."
