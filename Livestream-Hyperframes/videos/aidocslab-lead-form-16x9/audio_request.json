@@ -1,0 +1,45 @@
+{
+  "provider": "kokoro",
+  "speed": 1,
+  "lines": [
+    {
+      "id": "01",
+      "text": "Somebody visited your site last night. Did you know?"
+    },
+    {
+      "id": "02",
+      "text": "A plain contact form barely gets a name and an email. No context. No qualifying. Just noise."
+    },
+    {
+      "id": "03",
+      "text": "Meet the AI lead capture form — built into every AI Docs Lab page."
+    },
+    {
+      "id": "04",
+      "text": "It's live 24/7 — qualifying leads while you sleep."
+    },
+    {
+      "id": "05",
+      "text": "Niche. Ideal client. Their offer. Their biggest problem — it asks before you ever have to."
+    },
+    {
+      "id": "06",
+      "text": "The moment they submit — it's already on your calendar."
+    },
+    {
+      "id": "07",
+      "text": "Higher conversion. Zero manual entry. Calls that are already qualified."
+    },
+    {
+      "id": "08",
+      "text": "Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours."
+    }
+  ],
+  "bgm": {
+    "mode": "retrieve",
+    "query": "upbeat, attention-grabbing modern electronic underscore, driving but not overpowering the voiceover",
+    "blob": "Never miss a lead again — your AI lead capture form works 24/7, auto-qualifies, and books faster.",
+    "arc": "Feature-Benefit Cascade — Hook → Pain → Product Intro → Benefit ×4 → CTA"
+  },
+  "voice": "am_michael"
+}
