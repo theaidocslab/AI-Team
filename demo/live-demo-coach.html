@@ -318,8 +318,9 @@ footer { padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,
     <div class="demo-container">
         <div class="demo-controls">
             <button class="demo-btn active" onclick="updateDemo('coach', event)">High-Ticket Coach</button>
-            <button class="demo-btn" onclick="updateDemo('lawyer', event)">Family Attorney</button>
-            <button class="demo-btn" onclick="updateDemo('contractor', event)">HVAC Contractor</button>
+            <button class="demo-btn" onclick="updateDemo('lawyer', event)">Attorney</button>
+            <button class="demo-btn" onclick="updateDemo('consultant', event)">Consultant</button>
+            <button class="demo-btn" onclick="updateDemo('solo', event)">Solo Entrepreneur / SMB</button>
         </div>
         
         <div class="demo-preview" id="preview-box">
@@ -328,6 +329,28 @@ footer { padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,
             <p class="preview-p" id="preview-text" style="color: var(--muted); font-size: 18px; line-height: 1.8; margin-bottom: 40px; max-width: 700px;">I help women 35-50 who feel stuck in their careers build a real, validated business plan in 90 days — while still working their current job.</p>
             <a href="https://calendly.com/theaidocslab" target="_blank" style="text-decoration: none; display: inline-block; background: var(--gold); color: black; font-weight: 900; font-size: 13px; letter-spacing: 2px; padding: 20px 40px; border-radius: 4px; text-transform: uppercase;">BOOK YOUR STRATEGY CALL</a>
         </div>
+    </div>
+</section>
+
+<section class="section" style="background: var(--black-2);">
+    <div class="section-header">
+        <p class="section-eyebrow">Every Build Includes This</p>
+        <h2 class="section-title">Your <span>Lead Capture</span> System</h2>
+        <p style="color: var(--muted);">Every deliverable includes a built-in lead capture form — qualifying prospects 24/7, before they ever hit your inbox.</p>
+    </div>
+
+    <div style="max-width: 480px; margin: 0 auto; background: var(--black-3); border: 1px solid var(--border); border-radius: 16px; padding: 40px;" id="leadFormBox">
+        <p style="color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">Get Started Today</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 25px;">Tell Us About Your Business</h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;" id="leadFormFields">
+            <input type="text" id="leadName" placeholder="Your Name" style="background: var(--black); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; color: white; font-size: 14px; width: 100%;">
+            <input type="email" id="leadEmail" placeholder="Email Address" style="background: var(--black); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; color: white; font-size: 14px; width: 100%;">
+            <input type="tel" id="leadPhone" placeholder="Phone Number" style="background: var(--black); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; color: white; font-size: 14px; width: 100%;">
+            <textarea id="leadDetails" placeholder="What are you looking to build?" rows="3" style="background: var(--black); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; color: white; font-size: 14px; width: 100%; resize: none; font-family: inherit;"></textarea>
+            <button id="leadSubmitBtn" style="background: var(--gold); color: black; font-weight: 900; font-size: 13px; letter-spacing: 2px; padding: 16px; border: none; border-radius: 8px; text-transform: uppercase; cursor: pointer;" onclick="submitLeadForm()">SEND MY INQUIRY</button>
+        </div>
+        <p id="leadFormNote" style="color: var(--muted); font-size: 12px; margin-top: 16px; text-align: center;">Every inquiry routes straight to your inbox — pre-qualified, no spam, no forms lost in the void.</p>
     </div>
 </section>
 
@@ -433,6 +456,36 @@ function trackFunnelEvent(type) {
   } catch (e) {}
 }
 
+function submitLeadForm() {
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const phone = document.getElementById('leadPhone').value.trim();
+  const details = document.getElementById('leadDetails').value.trim();
+
+  if (!name || !email) {
+    alert('Please enter at least your name and email.');
+    return;
+  }
+
+  trackFunnelEvent('form_submit');
+
+  const formData = new FormData();
+  formData.append('form-name', 'sovereign-inquiry');
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('phone', phone);
+  formData.append('details', details);
+
+  fetch('/', { method: 'POST', body: formData })
+    .then(showLeadFormSuccess)
+    .catch(showLeadFormSuccess);
+}
+
+function showLeadFormSuccess() {
+  document.getElementById('leadFormFields').style.display = 'none';
+  document.getElementById('leadFormNote').innerText = "Got it — thanks! I'll be in touch within 24 hours.";
+}
+
 function updateDemo(type, event) {
     const box = document.getElementById('preview-box');
     const tag = document.getElementById('preview-tag');
@@ -449,14 +502,19 @@ function updateDemo(type, event) {
             text: "I help women 35-50 who feel stuck in their careers build a real, validated business plan in 90 days — while still working their current job."
         },
         lawyer: {
-            tag: "Currently Showing: Family Attorney",
-            title: "Protect Your Family's Future Without the Billable Hour Nightmare.",
-            text: "We provide flat-fee estate planning and family protection strategies that ensure your legacy is secure, without the complexity of traditional firms."
+            tag: "Currently Showing: Attorney",
+            title: "Clients Deserve Clarity, Not a Billable Hour Nightmare.",
+            text: "We provide flat-fee legal strategies and clear guidance so your clients understand exactly what to expect, without the complexity of traditional firms."
         },
-        contractor: {
-            tag: "Currently Showing: HVAC Contractor",
-            title: "Your AC Fixed Today, Or You Don't Pay A Dime.",
-            text: "Emergency HVAC repairs for homeowners who can't wait. We get your home back to 72 degrees within 4 hours of your call, guaranteed."
+        consultant: {
+            tag: "Currently Showing: Consultant",
+            title: "Stop Trading Hours For Dollars. Start Scaling Your Expertise.",
+            text: "We help consultants package their knowledge into scalable offers and land high-value clients — without another unpaid discovery call that goes nowhere."
+        },
+        solo: {
+            tag: "Currently Showing: Solo Entrepreneur / Small Business",
+            title: "Compete With The Big Guys — Without Their Overhead.",
+            text: "A professional AI-powered online presence that works around the clock, so you can focus on running your business instead of chasing leads."
         }
     };
     
@@ -481,8 +539,6 @@ function closeChat() {
     document.getElementById('chatPanel').style.display = 'none';
     document.querySelector('.chat-banner').style.display = 'block';
 }
-
-const CHAT_API_URL = 'https://api.theaidocslab.com/aidl-chat.php';
 
 const AIDL_SYSTEM_PROMPT = `You are the AI assistant for The AI Docs Lab™, on a demo landing page showing coaches, attorneys, and contractors what their AI-powered site could look like.
 
@@ -514,6 +570,7 @@ async function handleChat() {
 
     const messages = document.getElementById('chatMessages');
 
+    // User message
     const userMsg = document.createElement('div');
     userMsg.style = "background: var(--gold); color: black; padding: 15px; border-radius: 12px; align-self: flex-end; max-width: 85%; font-size: 14px; font-weight: 700; line-height: 1.6;";
     userMsg.innerText = text;
@@ -523,6 +580,7 @@ async function handleChat() {
 
     aidlChatHistory.push({ role: 'user', content: text });
 
+    // Typing indicator
     const typingMsg = document.createElement('div');
     typingMsg.id = 'aidl-typing';
     typingMsg.style = "background: var(--black-3); padding: 15px; border-radius: 12px; border: 1px solid var(--border); align-self: flex-start; max-width: 85%; font-size: 14px; line-height: 1.6; opacity: 0.6;";
@@ -531,7 +589,7 @@ async function handleChat() {
     messages.scrollTop = messages.scrollHeight;
 
     try {
-        const res = await fetch(CHAT_API_URL, {
+        const res = await fetch('https://api.theaidocslab.com/aidl-chat.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -539,8 +597,7 @@ async function handleChat() {
                     { role: 'system', content: AIDL_SYSTEM_PROMPT },
                     ...aidlChatHistory
                 ]
-            }),
-            signal: AbortSignal.timeout(8000),
+            })
         });
 
         const data = await res.json();
@@ -573,6 +630,15 @@ document.getElementById('chatInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') handleChat();
 });
 </script>
+
+<!-- Hidden Netlify form for the lead capture inquiry above -->
+<form name="sovereign-inquiry" netlify netlify-honeypot="bot-field" hidden>
+  <input name="bot-field">
+  <input name="name">
+  <input name="email">
+  <input name="phone">
+  <textarea name="details"></textarea>
+</form>
 
 </body>
 </html>
