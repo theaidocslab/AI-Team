@@ -280,7 +280,7 @@
     // targets: field1 y=225 -> ty=315 ; field2 y=330 -> ty=210 ; field3 y=435 -> ty=105 ; field4 y=540 -> ty=0
     tl.to(camera, { scale: 1.12, ty: 315, duration: 0.7, ease: "power2.out", onUpdate: paintCamera }, 1.1);
     tl.to(camera, { scale: 1.16, ty: 210, duration: 0.5, ease: "power2.out", onUpdate: paintCamera }, 2.3);
-    tl.to(camera, { scale: 1.2, ty: 105, duration: 0.5, ease: "power2.out", onUpdate: paintCamera }, 3.0);
+    tl.to(camera, { scale: 1.2, ty: 105, duration: 0.5, ease: "power2.out", onUpdate: paintCamera }, 3.15);
     tl.to(camera, { scale: 1.24, ty: 0, duration: 0.6, ease: "power2.out", onUpdate: paintCamera }, 3.85);
 
     // ---------- cursor + click-ripple helper ----------
@@ -295,7 +295,7 @@
     function clickAt(x, y, at) {
       tl.to(cursor, { scale: 0.85, duration: 0.08, ease: "power2.in", yoyo: true, repeat: 1 }, at);
       tl.set(ripple, { x: x, y: y, scale: 0, opacity: 1 }, at);
-      tl.to(ripple, { scale: 4, opacity: 0, duration: 0.6, ease: "power2.out" }, at);
+      tl.to(ripple, { scale: 3, opacity: 0, duration: 0.6, ease: "power2.out" }, at);
     }
 
     // ---------- Scene 1 (0.0-1.1s): cursor enters, clicks into "niche" field ----------
@@ -402,7 +402,7 @@
           var chosen = driver.t >= 5.07;
           opt3.style.backgroundColor = chosen ? "rgba(232,201,122,0.28)" : "rgba(255,255,255,0)";
           opt3.style.color = chosen ? "#0A0A0A" : "#5A5A5A";
-          f4El.textContent = driver.t >= 5.15 ? SELECTED : "";
+          f4El.textContent = driver.t >= 5.07 ? SELECTED : "";
         },
       },
       0
