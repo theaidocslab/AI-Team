@@ -1,0 +1,151 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .clip {
+      position: absolute;
+    }
+
+    /* full-bleed ground — dedicated clip layer, never painted on #root */
+    .bm07-bg {
+      inset: 0;
+      background: #0A0A0A; /* text-primary used as the flat, bare ground */
+    }
+
+    /* compass-drafted atmosphere ring behind the type — one per frame */
+    .bm07-ring {
+      top: 44%;
+      left: 50%;
+      width: 46cqw;
+      height: 46cqw;
+      margin-left: -23cqw;
+      margin-top: -23cqw;
+      border: 0.07cqw solid #C9A84C; /* line */
+      border-radius: 50%;
+      opacity: 0;
+    }
+    .bm07-ring::before {
+      content: '';
+      position: absolute;
+      inset: 14%;
+      border: 0.07cqw dashed #C9A84C;
+      border-radius: 50%;
+    }
+
+    /* the three hard-cut statement beats — dead-center, same anchor */
+    .bm07-phrase {
+      top: 44%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 78cqw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6cqw;
+    }
+
+    .bm07-phrase-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 6.2cqw; /* h1 — 2-3 word beats */
+      line-height: 1.06;
+      color: #FFFFFF; /* bg-primary, reversed on the dark ground */
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* the payoff beat: 6 words, drops to the h2 step per fit-to-measure, holds longest */
+    .bm07-phrase--final .bm07-phrase-text {
+      font-size: 4.0cqw;
+      line-height: 1.1;
+      white-space: normal;
+    }
+
+    .bm07-phrase-accent {
+      width: 18cqw;
+      height: 0.07cqw;
+      background: #C9A84C; /* line — the one closing-plate flourish on the payoff */
+      opacity: 0.6;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="07-benefit-montage"
+    data-width="1080"
+    data-height="1080"
+    data-duration="5.12"
+  >
+    <div
+      class="clip bm07-bg"
+      data-start="0"
+      data-duration="5.12"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="bm07-ring"
+      class="clip bm07-ring"
+      data-start="0"
+      data-duration="5.12"
+      data-track-index="1"
+    ></div>
+
+    <!-- Scene 1 (0.0-1.4s): "Higher conversion" hard-cuts in dead-center -->
+    <div
+      class="clip bm07-phrase"
+      data-start="0"
+      data-duration="1.4"
+      data-track-index="2"
+    >
+      <span class="bm07-phrase-text">Higher conversion</span>
+    </div>
+
+    <!-- Scene 2 (1.4-2.9s): hard cut clears it; "Zero manual entry" replaces it, same anchor/treatment -->
+    <div
+      class="clip bm07-phrase"
+      data-start="1.4"
+      data-duration="1.5"
+      data-track-index="2"
+    >
+      <span class="bm07-phrase-text">Zero manual entry</span>
+    </div>
+
+    <!-- Scene 3 (2.9s-end): hard cut clears it; the payoff line lands and HOLDS to the end -->
+    <div
+      class="clip bm07-phrase bm07-phrase--final"
+      data-start="2.9"
+      data-duration="2.22"
+      data-track-index="2"
+    >
+      <span class="bm07-phrase-text">Calls that are already qualified</span>
+      <span class="bm07-phrase-accent"></span>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    const bm07Ring = document.getElementById('bm07-ring');
+
+    // Ambient compass ring drifts into view under the first beat — the only
+    // continuous motion signal; the three statements themselves swap by pure
+    // hard cut (native clip visibility), never a tween, per this beat's spec.
+    tl.fromTo(
+      bm07Ring,
+      { opacity: 0 },
+      { opacity: 0.24, duration: 0.9, ease: 'power1.out' },
+      0
+    );
+
+    window.__timelines['07-benefit-montage'] = tl;
+  </script>
+</template>
