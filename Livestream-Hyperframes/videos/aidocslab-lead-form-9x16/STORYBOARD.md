@@ -170,7 +170,7 @@ Scene 3 (2.9–4.5s): hard cut clears it; "CALLS THAT ARE ALREADY QUALIFIED" lan
 
 - scene: The gold mark locks into a closing lockup; the $497 offer and URL resolve beneath it.
 - voiceover: "Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours."
-- duration: 8.491s
+- duration: 7.723s
 - transition_in: zoom-through
 - status: animated
 - src: compositions/frames/08-cta.html

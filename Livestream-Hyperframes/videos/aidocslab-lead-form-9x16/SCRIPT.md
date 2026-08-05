@@ -60,4 +60,4 @@
 **Time:** 30.5 – 35.0s
 **Delivery:** Warm, closing, a little urgent.
 
-    Your AI lead capture form — part of the four hundred ninety-seven dollar Coaching Landing Page. Live in forty-eight hours.
+    Your AI lead capture form — part of the four ninety-seven Coaching Landing Page. Built in forty-eight hours.

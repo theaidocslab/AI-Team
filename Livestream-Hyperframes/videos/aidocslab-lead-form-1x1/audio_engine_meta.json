@@ -56,10 +56,10 @@
     {
       "id": "08",
       "path": "assets/voice/08.wav",
-      "duration_s": 8.491,
+      "duration_s": 7.723,
       "words": []
     }
   ],
   "sfx": [],
-  "total_duration_s": 42.538
+  "total_duration_s": 41.77
 }
