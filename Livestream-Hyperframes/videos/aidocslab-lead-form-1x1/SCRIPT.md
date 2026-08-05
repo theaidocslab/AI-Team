@@ -32,7 +32,7 @@
 **Time:** 12.0 – 16.5s
 **Delivery:** Steady, confident.
 
-    It's live 24/7 — qualifying leads while you sleep.
+    It's live twenty-four seven — qualifying leads while you sleep.
 
 ## Line 5 — It asks the right questions (Frame 5)
 
@@ -60,4 +60,4 @@
 **Time:** 30.5 – 35.0s
 **Delivery:** Warm, closing, a little urgent.
 
-    Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours.
+    Your AI lead capture form — part of the four hundred ninety-seven dollar Coaching Landing Page. Live in forty-eight hours.

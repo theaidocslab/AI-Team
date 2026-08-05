@@ -85,7 +85,7 @@ Scene 3 (2.4–4.0s): on "AI Docs Lab page," the tagline text exits (fade + slig
 
 - scene: A live form mockup sits on screen with a subtle "always on" pulse; a clock quietly advances through night hours behind it.
 - voiceover: "It's live 24/7 — qualifying leads while you sleep."
-- duration: 4.373s
+- duration: 3.989s
 - transition_in: crossfade
 - status: animated
 - src: compositions/frames/04-benefit-247.html
@@ -170,7 +170,7 @@ Scene 3 (2.9–4.5s): hard cut clears it; "CALLS THAT ARE ALREADY QUALIFIED" lan
 
 - scene: The gold mark locks into a closing lockup; the $497 offer and URL resolve beneath it.
 - voiceover: "Your AI lead capture form — part of the $497 Coaching Landing Page. Live in 48 hours."
-- duration: 8.256s
+- duration: 8.491s
 - transition_in: zoom-through
 - status: animated
 - src: compositions/frames/08-cta.html

@@ -23,7 +23,7 @@
     {
       "frame": 4,
       "path": "assets/voice/04.wav",
-      "duration_s": 4.373,
+      "duration_s": 3.989,
       "words": []
     },
     {
@@ -47,7 +47,7 @@
     {
       "frame": 8,
       "path": "assets/voice/08.wav",
-      "duration_s": 8.256,
+      "duration_s": 8.491,
       "words": []
     }
   ],
