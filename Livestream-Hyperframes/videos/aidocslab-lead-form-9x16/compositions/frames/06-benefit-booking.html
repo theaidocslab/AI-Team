@@ -92,22 +92,22 @@
       white-space: nowrap;
     }
 
-    .bb-calendar-card {
+    .bb-inbox-card {
       position: absolute;
       left: 130px;
-      top: 410px;
+      top: 620px;
       width: 820px;
-      height: 820px;
+      height: 300px;
       background: var(--bb-white-overlay);
       border: 1px solid var(--bb-line);
       box-sizing: border-box;
       padding: 44px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 24px;
     }
 
-    .bb-cal-label {
+    .bb-inbox-label {
       font-family: "Raleway", sans-serif;
       font-size: 14px;
       font-weight: 500;
@@ -116,44 +116,72 @@
       color: var(--bb-accent);
     }
 
-    .bb-cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: 40px repeat(3, 160px);
-      width: 100%;
+    .bb-inbox-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
     }
 
-    .bb-cal-cell {
-      position: relative;
-      box-sizing: border-box;
-      border-right: 1px solid var(--bb-line);
-      border-bottom: 1px solid var(--bb-line);
+    .bb-inbox-avatar {
+      width: 68px;
+      height: 68px;
+      min-width: 68px;
+      border-radius: 50%;
+      border: 1px solid var(--bb-line);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      color: var(--bb-text-primary);
     }
 
-    .bb-cal-cell:nth-child(7n) {
-      border-right: none;
+    .bb-inbox-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
     }
 
-    .bb-cal-cell:nth-last-child(-n + 7) {
-      border-bottom: none;
-    }
-
-    .bb-cal-head {
+    .bb-inbox-sender {
       font-family: "Raleway", sans-serif;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--bb-accent);
+      font-weight: 600;
+      font-size: 24px;
+      color: var(--bb-text-primary);
     }
 
-    .bb-slot-fill {
-      position: absolute;
-      inset: 8px;
+    .bb-inbox-subject {
+      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--bb-text-secondary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .bb-inbox-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .bb-inbox-time {
+      font-family: "Raleway", sans-serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--bb-text-secondary);
+    }
+
+    .bb-inbox-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
       background: var(--bb-accent);
+      border: 1px solid var(--bb-line);
     }
 
     .bb-ink-line {
@@ -163,8 +191,8 @@
     }
   </style>
 
-  <div id="root" data-composition-id="06-benefit-booking" data-width="1080" data-height="1920" data-duration="3.7">
-    <div id="bb-bg" class="clip bb-bg" data-start="0" data-duration="3.7" data-track-index="0">
+  <div id="root" data-composition-id="06-benefit-booking" data-width="1080" data-height="1920" data-duration="3.892">
+    <div id="bb-bg" class="clip bb-bg" data-start="0" data-duration="3.892" data-track-index="0">
       <div class="bb-geo-ring"></div>
     </div>
 
@@ -180,47 +208,23 @@
     </div>
 
     <div
-      id="bb-calendar-card"
-      class="clip bb-calendar-card"
+      id="bb-inbox-card"
+      class="clip bb-inbox-card"
       data-start="1.15"
-      data-duration="2.55"
+      data-duration="2.742"
       data-track-index="2"
     >
-      <div class="bb-cal-label">This week</div>
-      <div class="bb-cal-grid">
-        <div class="bb-cal-cell bb-cal-head">M</div>
-        <div class="bb-cal-cell bb-cal-head">T</div>
-        <div class="bb-cal-cell bb-cal-head">W</div>
-        <div class="bb-cal-cell bb-cal-head">T</div>
-        <div class="bb-cal-cell bb-cal-head">F</div>
-        <div class="bb-cal-cell bb-cal-head">S</div>
-        <div class="bb-cal-cell bb-cal-head">S</div>
-
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell">
-          <div id="bb-slot-fill" class="bb-slot-fill"></div>
+      <div class="bb-inbox-label">New Lead</div>
+      <div class="bb-inbox-row">
+        <div class="bb-inbox-avatar">S</div>
+        <div class="bb-inbox-text">
+          <div class="bb-inbox-sender">Sarah Johnson</div>
+          <div class="bb-inbox-subject">Niche, offer &amp; budget — all captured</div>
         </div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
-        <div class="bb-cal-cell"></div>
+        <div class="bb-inbox-meta">
+          <div class="bb-inbox-time">Just now</div>
+          <div id="bb-inbox-dot" class="bb-inbox-dot"></div>
+        </div>
       </div>
       <div id="bb-ink-line" class="bb-ink-line"></div>
     </div>
@@ -230,9 +234,9 @@
     window.__timelines = window.__timelines || {};
     const tl = gsap.timeline({ paused: true });
 
-    // pre-set the two delayed-reveal children hidden so the calendar card's
+    // pre-set the two delayed-reveal children hidden so the inbox card's
     // own entrance (1.15s) does not prematurely show them
-    tl.set("#bb-slot-fill", { opacity: 0, scale: 0.3, transformOrigin: "center center" }, 0);
+    tl.set("#bb-inbox-dot", { opacity: 0, scale: 0.3, transformOrigin: "center center" }, 0);
     tl.set("#bb-ink-line", { scaleX: 0, transformOrigin: "left center" }, 0);
 
     // Scene 1 (0.0-1.15s) — booking-link field, calm hold
@@ -243,21 +247,21 @@
       0,
     );
 
-    // Scene 2 (1.15-2.42s) — weight-transfer: field slides aside, calendar
-    // fills the exact same anchor, then the slot snaps to filled accent
+    // Scene 2 (1.15-2.42s) — weight-transfer: field slides aside, the inbox card
+    // fills the exact same anchor, then the unread dot snaps in
     tl.to(
       "#bb-field-card",
       { x: -260, scale: 0.68, opacity: 0, duration: 0.55, ease: "power3.in" },
       1.15,
     );
     tl.fromTo(
-      "#bb-calendar-card",
+      "#bb-inbox-card",
       { opacity: 0, scale: 0.75 },
       { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" },
       1.15,
     );
     tl.fromTo(
-      "#bb-slot-fill",
+      "#bb-inbox-dot",
       { opacity: 0, scale: 0.3 },
       { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" },
       1.55,

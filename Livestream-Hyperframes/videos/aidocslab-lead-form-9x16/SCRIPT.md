@@ -46,7 +46,7 @@
 **Time:** 21.5 – 26.0s
 **Delivery:** Brisk, satisfied.
 
-    The moment they submit — it's already on your calendar.
+    The moment they submit — it lands right in your inbox.
 
 ## Line 7 — What that actually adds up to (Frame 7)
 

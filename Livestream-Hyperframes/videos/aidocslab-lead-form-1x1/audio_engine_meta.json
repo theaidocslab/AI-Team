@@ -44,7 +44,7 @@
     {
       "id": "06",
       "path": "assets/voice/06.wav",
-      "duration_s": 3.2,
+      "duration_s": 3.392,
       "words": []
     },
     {
@@ -61,5 +61,5 @@
     }
   ],
   "sfx": [],
-  "total_duration_s": 41.77
+  "total_duration_s": 41.962
 }

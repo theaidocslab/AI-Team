@@ -124,11 +124,11 @@ Scene 2 (1.1–2.3s): on "Niche," the field types in "Business mindset coaching"
 Scene 3 (2.3–3.4s): on "Ideal client. Their offer," the cursor whip-pans down to the next two fields in quick succession — "Who is your ideal client?" fills with "Women 35–50 who feel stuck in their careers," then "Your main offer & price" fills with "90-day coaching program — $2,500" — each a discrete typed beat, camera chasing the cursor down the card.
 Scene 4 (3.4–5.0s): on "their biggest problem," the cursor clicks the "Biggest lead generation problem" dropdown; it springs open (Cartesian: flat, 1px hairline border, no shadow) listing the real options, the cursor selects "My page exists but generates zero leads," the dropdown closes on the choice. Camera settles static, holds on the completed field.
 
-## Frame 6 — Straight onto your calendar
+## Frame 6 — Straight into your inbox
 
-- scene: The booking-link field is filled, then the frame pivots to a calendar surface where a slot instantly fills.
-- voiceover: "The moment they submit — it's already on your calendar."
-- duration: 3.2s
+- scene: The booking-link field is filled, then the frame pivots to an inbox notification card where a new-lead row appears.
+- voiceover: "The moment they submit — it lands right in your inbox."
+- duration: 3.392s
 - transition_in: crossfade
 - status: animated
 - src: compositions/frames/06-benefit-booking.html
@@ -136,14 +136,14 @@ Scene 4 (3.4–5.0s): on "their biggest problem," the cursor clicks the "Biggest
 - persuasion: Friction reduction
 - beat: ease
 - blueprint: video-text-pivot
-- focal: (reconstructed form + calendar surfaces, no captured asset)
-- roles: booking-field = cutout (Scene 1) · calendar-slot = cutout (Scene 2, same anchor)
+- focal: (reconstructed form + inbox notification surfaces, no captured asset)
+- roles: booking-field = cutout (Scene 1) · inbox-row = cutout (Scene 2, same anchor)
 
-Adapt: the blueprint's "product video" is instead the booking-link form field (a static surface, not real video) — it slides aside into the exact space a calendar surface now fills, keeping the weight-transfer signature as one event, not two; the piece skips the blueprint's Scene 3/4 kinetic-text pivot since the VO is already a single clean line.
+Adapt: the blueprint's "product video" is instead the booking-link form field (a static surface, not real video) — it slides aside into the exact space an inbox notification card now fills, keeping the weight-transfer signature as one event, not two; the piece skips the blueprint's Scene 3/4 kinetic-text pivot since the VO is already a single clean line.
 
 Scene 1 (0.0–1.6s): the "Your booking link" field (from the same form card) is centered, holding its real placeholder "calendly.com/yourname" — Centered, ~35% of frame, calm hold as the VO opens.
-Scene 2 (1.6–3.4s): on "it's already," the field SLIDES aside (x + scale-down, power3) into the space a calendar surface now fills, appearing at the exact same anchor — one weight-transfer reading as a single event. The calendar shows a simple week grid (Cartesian hairline rules only, no fill blocks) with one slot that snaps to a filled `accent` gold state as it enters.
-Scene 3 (3.4–4.5s): hold. The filled calendar slot reads clean and still; a thin `horizontal-accent` ink line draws once beneath it and stays — the frame's single ink accent, used sparingly per Cartesian's rule.
+Scene 2 (1.6–3.4s): on "lands right," the field SLIDES aside (x + scale-down, power3) into the space an inbox notification card now fills, appearing at the exact same anchor — one weight-transfer reading as a single event. The card shows a single new-lead email row (Cartesian hairline rule, no fill blocks) with an unread gold dot that snaps to its filled `accent` state as it enters.
+Scene 3 (3.4–4.5s): hold. The inbox row reads clean and still; a thin `horizontal-accent` ink line draws once beneath it and stays — the frame's single ink accent, used sparingly per Cartesian's rule.
 
 ## Frame 7 — What that actually adds up to
 
