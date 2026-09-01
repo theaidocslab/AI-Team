@@ -15,3 +15,8 @@
   from = "/stats"
   to = "/.netlify/functions/stats"
   status = 200
+
+[[redirects]]
+  from = "/scrape"
+  to = "/.netlify/functions/scrape"
+  status = 200
