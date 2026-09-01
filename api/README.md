@@ -7,7 +7,7 @@ This is a small server that keeps your Groq API key secret while letting the dem
 - `functions/chat.js` — the actual server code (a "Netlify Function" — a small program that only runs when someone calls it, so there's no server to keep running 24/7).
 - `functions/track.js` — records a page visit every time someone loads the demo page (just the URL path and the referring site, nothing personal).
 - `functions/stats.js` — a simple dashboard showing that traffic: today / this week / all-time, a 7-day chart, top pages, and top traffic sources. View it at `https://api.theaidocslab.com/stats`. It has no login — don't link to it publicly, just bookmark the URL.
-- `functions/scrape.js` — lets a page ask a website's content to be scraped and summarized by an AI, using [ScrapeGraphAI](https://github.com/ScrapeGraphAI/Scrapegraph-ai)'s hosted Cloud API. Same secret-key-stays-on-the-server pattern as `chat.js`. Live at `https://api.theaidocslab.com/scrape`.
+- `functions/scrape.js` — lets a page ask for something to be pulled out of a website: it fetches the page's HTML itself, then asks Grok (xAI) to extract whatever was requested. Same secret-key-stays-on-the-server pattern as `chat.js`. Works on server-rendered pages; won't see content that only appears after JavaScript runs (no headless browser here). Live at `https://api.theaidocslab.com/scrape`.
 - `netlify.toml` — tells Netlify where the functions live and sets up short URLs (`/chat`, `/track`, `/stats`).
 - `package.json` — lists `@netlify/blobs`, the storage Netlify gives every site for free, used here to remember visit counts between page loads.
 
@@ -19,7 +19,8 @@ This is a small server that keeps your Groq API key secret while letting the dem
    - Go to this Netlify site's **Site settings → Environment variables**
    - Add a variable named `GROQ_API_KEY` with your actual key as the value
    - (Optional) Add `GROQ_MODEL` if you want to use a different Groq model than the default (`llama-3.3-70b-versatile`) — check Groq's console for current available model names, since they change over time.
-   - To enable `scrape.js`, also add `SGAI_API_KEY` — get one from [scrapegraphai.com](https://scrapegraphai.com) (their dashboard shows the key once you sign up for their Cloud API). Without this variable set, `/scrape` will respond with a 500 "Server not configured" error instead of breaking the deploy.
+   - To enable `scrape.js`, also add `GROK_API_KEY` — get one from the [xAI console](https://console.x.ai). Without this variable set, `/scrape` will respond with a 500 "Server not configured" error instead of breaking the deploy.
+   - (Optional) Add `GROK_MODEL` if you want a different Grok model than the default (`grok-4-fast`) — check the xAI console for current model names.
 4. **Deploy.** Netlify will build and your function will be live at `https://api.theaidocslab.com/chat`.
 
 Since `track.js`, `stats.js`, and `scrape.js` were added after the first deploy, this site needs to **redeploy** to pick them up — if it's connected to this GitHub repo, pushing to the branch should trigger that automatically. If not, trigger a manual deploy from the Netlify dashboard (Deploys → Trigger deploy). This deploy also needs to run `npm install` to pick up the new `@netlify/blobs` dependency — Netlify does this automatically when it sees `package.json`, no action needed on your part beyond redeploying.
@@ -42,7 +43,7 @@ const res = await fetch('https://api.theaidocslab.com/scrape', {
 const { result } = await res.json();
 ```
 
-Note: ScrapeGraphAI's public API surface (endpoint path, auth header name) can change — if `/scrape` starts returning 502s, check their current docs at https://docs.scrapegraphai.com and update the constants at the top of `functions/scrape.js`.
+Note: since this fetches HTML directly with no headless browser, it only works on pages whose content is present in the initial server response. A page that renders its content client-side with JavaScript (a typical React/Vue single-page app) will come back with little or no readable text.
 
 ## Security notes
 

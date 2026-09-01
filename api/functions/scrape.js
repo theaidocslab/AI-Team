@@ -1,13 +1,12 @@
-// Server-side scraping backend using ScrapeGraphAI's hosted SmartScraper API.
-// The SGAI API key lives only here, in Netlify's environment variables —
-// it is never sent to or readable by the browser.
+// Server-side scraping backend: fetches a page's HTML directly, then asks
+// Grok (xAI) to pull out whatever the caller asked for. No third-party
+// scraping platform, no separate signup — just plain HTTP fetch + the same
+// "keep the key on the server" pattern as chat.js.
 //
-// ScrapeGraphAI (https://github.com/ScrapeGraphAI/Scrapegraph-ai) is an
-// LLM-powered scraper. Rather than running their Python library (which needs
-// Playwright + its own LLM key) inside a Netlify function, this calls their
-// managed Cloud API over plain HTTP, the same way chat.js calls Groq.
-// Docs: https://docs.scrapegraphai.com — verify the endpoint path and auth
-// header there if ScrapeGraphAI changes their API surface.
+// Trade-off vs. a managed scraper (e.g. ScrapeGraphAI): this only sees the
+// HTML the server returns on first load. It won't work on pages that render
+// their content with client-side JavaScript (React/Vue apps, infinite
+// scroll, etc.) since there's no headless browser here.
 
 const ALLOWED_ORIGINS = [
   'https://theaidocslabdemolandingpage.netlify.app',
@@ -17,7 +16,14 @@ const ALLOWED_ORIGINS = [
   'http://localhost:8888', // netlify dev
 ];
 
-const SCRAPEGRAPH_API_URL = 'https://api.scrapegraphai.com/v1/smartscraper';
+const GROK_API_URL = 'https://api.x.ai/v1/chat/completions';
+
+// Cap how much page text we send to the model - keeps cost/latency bounded
+// and avoids blowing the context window on huge pages.
+const MAX_PAGE_CHARS = 40_000;
+const FETCH_TIMEOUT_MS = 10_000;
+
+const SYSTEM_PROMPT = `You extract information from raw webpage HTML based on the user's request. Respond with only the requested information - no preamble, no meta-commentary about the page or the HTML. If the requested information isn't present in the page, say so plainly instead of guessing.`;
 
 // Best-effort in-memory rate limit. Resets on cold start and isn't shared
 // across concurrent function instances - it's a speed bump against casual
@@ -43,6 +49,24 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
+}
+
+// Strips scripts/styles/comments and tags, collapses whitespace, so the
+// model sees readable text instead of paying for markup tokens.
+function htmlToText(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 exports.handler = async (event) => {
@@ -84,37 +108,79 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Prompt too long (max 500 characters)' }) };
   }
 
-  const apiKey = process.env.SGAI_API_KEY;
+  const apiKey = process.env.GROK_API_KEY;
   if (!apiKey) {
-    console.error('SGAI_API_KEY is not set in this environment');
+    console.error('GROK_API_KEY is not set in this environment');
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Server not configured' }) };
   }
 
+  let pageText;
   try {
-    const sgaiResponse = await fetch(SCRAPEGRAPH_API_URL, {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    let pageResponse;
+    try {
+      pageResponse = await fetch(websiteUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AIDocsLabScraper/1.0)' },
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    if (!pageResponse.ok) {
+      return { statusCode: 502, headers, body: JSON.stringify({ error: `Could not fetch page (status ${pageResponse.status})` }) };
+    }
+
+    const contentType = pageResponse.headers.get('content-type') || '';
+    if (!contentType.includes('text/html') && !contentType.includes('text/plain')) {
+      return { statusCode: 415, headers, body: JSON.stringify({ error: `Unsupported content type: ${contentType || 'unknown'}` }) };
+    }
+
+    const html = await pageResponse.text();
+    pageText = htmlToText(html).slice(0, MAX_PAGE_CHARS);
+
+    if (!pageText) {
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Page returned no readable content (it may require JavaScript to render)' }) };
+    }
+  } catch (err) {
+    console.error('Page fetch error', err);
+    const timedOut = err.name === 'AbortError';
+    return { statusCode: 502, headers, body: JSON.stringify({ error: timedOut ? 'Fetching the page timed out' : 'Could not fetch the page' }) };
+  }
+
+  try {
+    const grokResponse = await fetch(GROK_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'SGAI-APIKEY': apiKey,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        website_url: websiteUrl,
-        user_prompt: prompt,
+        model: process.env.GROK_MODEL || 'grok-4-fast',
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: `Page URL: ${websiteUrl}\n\nRequest: ${prompt}\n\nPage content:\n${pageText}` },
+        ],
+        max_tokens: 800,
+        temperature: 0.2,
       }),
     });
 
-    if (!sgaiResponse.ok) {
-      const errText = await sgaiResponse.text();
-      console.error('ScrapeGraphAI API error', sgaiResponse.status, errText);
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Upstream scraping service error' }) };
+    if (!grokResponse.ok) {
+      const errText = await grokResponse.text();
+      console.error('Grok API error', grokResponse.status, errText);
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Upstream AI service error' }) };
     }
 
-    const data = await sgaiResponse.json();
+    const data = await grokResponse.json();
+    const result = data.choices?.[0]?.message?.content?.trim()
+      || 'No result returned.';
 
     return {
       statusCode: 200,
       headers: { ...headers, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ result: data.result ?? data }),
+      body: JSON.stringify({ result }),
     };
   } catch (err) {
     console.error('Scrape function error', err);
